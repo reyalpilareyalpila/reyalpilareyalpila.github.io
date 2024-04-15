@@ -248,7 +248,7 @@ def convert_and_upload(file_path):
         reversed_s = encoded_file_url[::-1]
         global new_text
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
-        new_text.insert(tk.END, "https://manager.iread.org.cn/https:/im.qq.com/https:/www.tencent.com/zh-cn.html?u="+reversed_s.decode('utf-8'))
+        new_text.insert(tk.END, "https://manager.iread.org.cn/https:/im.qq.com/https:/www.tencent.com/zh-cn1.html?u="+reversed_s.decode('utf-8'))
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
