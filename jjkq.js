@@ -241,7 +241,7 @@ def convert_and_upload(file_path):
 
         data = response.json()
         file_url = data['fileUrl']
-        print(file_url)
+        # print(file_url)
 
         btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url
 
