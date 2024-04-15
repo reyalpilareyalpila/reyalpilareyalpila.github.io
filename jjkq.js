@@ -109,6 +109,9 @@ def update_data():
             
             if content==result:
               result_label.config(text="激活成功啦")
+              b.update(className, objectId, data)
+              with open("666.txt", "w") as f:
+                   f.write(objectId)
               abcd()
             else:
               result_label.config(text="激活失败")
