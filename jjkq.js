@@ -58,21 +58,20 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("temp_qrcode.png")
-    api_url = "https://msmarket.msx.digitalyili.com/gateway/api/commons/common/file/upload"
+    api_url = "https://www.yougouco.com/utility/attachment/mobile/upload"
        
 
     headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
-    cookies = {'Cookie': 'pgv_pvid=5642411380; RK=GuHIkztdRE; ptcz=55f76c636759d585028341a8965e62a4ecf379ceb35c48ad8303dd44b5598d73; qq_domain_video_guid_verify=2deb7a01cf61ff45; tvfe_boss_uuid=98d2b9377fd02b1d; fqm_pvqid=24e12e13-ce37-43fb-9c59-e7c9f537de89; o_cookie=2422483200; _t_qbtool_uid=5e7777d68c61102cebcd0993377988cb; _ga=GA1.1.643483315.1698692210; _qimei_fingerprint=33c3b4cf3ae1328ae6037e0496506054; _qimei_h38=527f7c30bb543a73124a7a9a0200000f11781a; _qimei_q36=; _clck=m33bp|1|fid|0; pac_uid=1_2422483200; iip=0; _qimei_uuid42=181131014311007a66b1e1563fe8153f6d0f0f5563; ptui_loginuin=1521239297; _horizon_uid=774abaf8-d852-4e2d-a3c9-ae0e5d8ad069; __wj_userid=774abaf8-d852-4e2d-a3c9-ae0e5d8ad069; _ga_TPFW0KPXC1=GS1.1.1712353781.4.0.1712353781.0.0.0; _qpsvr_localtk=0.22877773635703536; pgv_info=ssid=s8335269226; uin=o1521239297; skey=@90i7h41ts; verifysession=h016139cdb03f10fc6d5e0b5903dcf5512783d5b04e4b22bc22f342b03fa7cf42ba913bfe20fea9de94; _horizon_sid=783bac91-0f0e-446b-ac99-bd0efb552ae4; _tucao_session=dTlSc2UyZndVbUgzNTlzRVQ0cGhMY0JIRTRiVjhvU1gvSzAzVFhVSDNYK21STjJhODBDeUJUSTBPamZOZVo4eEkyait0QllBZUJOYmtia0lweUtFSzhHZEFFd3UyYVh4WExSNXZ3cjJlMHNjN3V1OFJiSkdiSlBXT2o4dmZUdm9JRzBiblhzUlFONWVVQ2FQempXamtRPT0%3D--9JvGZKXRLFLl5Mysje9pFA%3D%3D--MGZmM2QxNjU1MTNiNWE2MTg4NmI0MzE3YWZjZWQzNmM%3D; _tucao_custom_info=ZE8wZG5yZHdBMFduVlZsZi9LZEZSNDNaOCsvcW5ybmN3emMyWVo4U3l0cTVjV0NIcTg2TGJwMFFnc05MTHNWSg%3D%3D--dxELfdrrGxuZV6DVUKkKWw%3D%3D--MmNiMjI3MzZhNGVhZjI5ZDI0NmVkNWMwNmQxODZkOGQ%3D'}
-
+    cookies = {'Cookie': ''}
     with open("temp_qrcode.png", "rb") as f:
-        files = {"multipartFile": f}
-        data = {"type": "post"}
+        files = {"file": f}
+        data = {"type": "image"}
         session = requests.Session()
         response = session.post(api_url, headers=headers , cookies=cookies,files=files,data=data)
         print(response)
     data = response.json()
     print(data)
-    file_url666 = data['data']
+    file_url666 = data['data']['url']
     print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
