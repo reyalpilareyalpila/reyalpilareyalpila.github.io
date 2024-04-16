@@ -248,14 +248,14 @@ def convert_and_upload(file_path):
         reversed_s = encoded_file_url[::-1]
         global new_text
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
-        new_text.insert(tk.END, "https://cdn.jmj1995.com/iapp_171325277512284.jpg?u="+reversed_s.decode('utf-8'))
+        new_text.insert(tk.END, "https://manager.iread.org.cn/https:/im.qq.com/https:/www.tencent.com/zh-cn1.html?u="+reversed_s.decode('utf-8'))
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
 
         # 绑定右键菜单到文本框
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
-        url="https://cdn.jmj1995.com/iapp_171325277512284.jpg?u="+reversed_s.decode('utf-8')
+        url="https://manager.iread.org.cn/https:/im.qq.com/https:/www.tencent.com/zh-cn.html?u="+reversed_s.decode('utf-8')
         display_qrcode(url)
        
         files["file"].close()
@@ -274,7 +274,7 @@ def rename_ts_to_png(directory):
             os.rename(old_path, new_path)
 
 def upload_png_files(output_dir):
-    base_url = "https://api-blx.benlai.com/groundwork/p/i/oss/uploadFile?baseDir=wechat/feedBack&fileType=img&systemName=member"
+    base_url = "https://msmarket.msx.digitalyili.com/gateway/api/commons/common/file/upload"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -300,10 +300,11 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            response = session.post(url, files={'file': file})
+            headers = {'access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}  # 添加所需的header
+            response = session.post(url, files={'multipartFile': file}, headers=headers)
             response.raise_for_status()
             data = response.json()
-            uploaded_url = data['data']['url']
+            uploaded_url = data['data']
             return uploaded_url
     except Exception as e:
         print(f"上传文件 {png_path} 失败：{e}")
