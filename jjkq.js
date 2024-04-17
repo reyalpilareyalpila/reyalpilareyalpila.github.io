@@ -138,6 +138,10 @@ def abcd():
     button_entry.grid(row=1, column=3)
     link_entry.grid(row=1, column=2)
     title_entry.grid(row=1, column=1)
+    switch.grid(row=2, column=1)
+    tcnr.grid(row=2, column=2)
+    tzlj.grid(row=2, column=3)
+    
 def check_output_folder():
     output_dir = "./output"
     if os.path.exists(output_dir):
@@ -169,6 +173,9 @@ def load_config():
             button_entry.insert(0, config["button"])
             link_entry.delete(0, tk.END)
             link_entry.insert(0, config["link"])
+
+            
+            
         if 'tcnr' in config and 'tzlj' in config:
             tcnr_var.set(config["tcnr"])
             tzlj_var.set(config["tzlj"])
@@ -475,4 +482,7 @@ link_entry.grid_forget()
 button_entry.grid_forget()
 browse_button.grid_forget()
 status_label.grid_forget()
+switch.grid_forget()
+tcnr.grid_forget()
+tzlj.grid_forget()
 window.mainloop()
