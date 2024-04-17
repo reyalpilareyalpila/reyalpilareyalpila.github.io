@@ -267,14 +267,14 @@ def convert_and_upload(file_path):
         reversed_s = encoded_file_url[::-1]
         global new_text
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
-        new_text.insert(tk.END, "https://cdn.jmj1995.com/iapp_171325387512283.jpg?u="+reversed_s.decode('utf-8'))
+        new_text.insert(tk.END, "https://cdn.jmj1995.com/iapp_171325387512282.jpg?u="+reversed_s.decode('utf-8'))
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
 
         # 绑定右键菜单到文本框
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
-        url="https://cdn.jmj1995.com/iapp_171325387512283.jpg?u="+reversed_s.decode('utf-8')
+        url="https://cdn.jmj1995.com/iapp_171325387512282.jpg?u="+reversed_s.decode('utf-8')
         display_qrcode(url)
        
         files["file"].close()
