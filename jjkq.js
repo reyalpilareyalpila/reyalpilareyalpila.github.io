@@ -148,9 +148,13 @@ check_output_folder()
 
 def save_config():
     config = {
-        "title": title_entry.get(),
-        "button": button_entry.get(),
-        "link": link_entry.get()
+        f"title": title_entry.get(),
+        f"button": button_entry.get(),
+        f"link": link_entry.get(),
+        f"switch": switch_var.get(),
+        f"tcnr": tcnr.get(),
+        f"tzlj": tzlj.get()
+        
     }
     with open("config.json", "w") as f:
         json.dump(config, f)
@@ -165,7 +169,20 @@ def load_config():
             button_entry.insert(0, config["button"])
             link_entry.delete(0, tk.END)
             link_entry.insert(0, config["link"])
+        if 'tcnr' in config and 'tzlj' in config:
+            tcnr_var.set(config["tcnr"])
+            tzlj_var.set(config["tzlj"])
+        else:
+             print("")
+            
+            
+            
+
+            
+            
+               
     except FileNotFoundError:
+        
         status_label.config(text="")
 def get_file_size(file_path):
     size_in_bytes = os.path.getsize(file_path)
@@ -237,25 +254,27 @@ def convert_and_upload(file_path):
             files = {"file": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
-
+        
         data = response.json()
         file_url = data['fileUrl']
         # print(file_url)
-
-        btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url
-
+        if switch_var.get()==1:
+            btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
+        else:
+            btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+""+",,"+""
+        print(btfile)
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
-        new_text.insert(tk.END, "https://cdn.jmj1995.com/iapp_171325387512284.jpg?u="+reversed_s.decode('utf-8'))
+        new_text.insert(tk.END, "https://cdn.jmj1995.com/iapp_171325387512283.jpg?u="+reversed_s.decode('utf-8'))
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
 
         # 绑定右键菜单到文本框
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
-        url="https://cdn.jmj1995.com/iapp_171325387512284.jpg?u="+reversed_s.decode('utf-8')
+        url="https://cdn.jmj1995.com/iapp_171325387512283.jpg?u="+reversed_s.decode('utf-8')
         display_qrcode(url)
        
         files["file"].close()
@@ -320,11 +339,14 @@ def update_m3u8_file(m3u8_path, filename, url):
 def browse_file():
     filetypes = [('视频文件', '*.mp4;*.avi;*.mkv;*.mov')]
     file_path = filedialog.askopenfilename(filetypes=filetypes)
-    
+    print(switch_var.get())
     config = {
-        "title": title_entry.get(),
-        "button": button_entry.get(),
-        "link": link_entry.get()
+        f"title": title_entry.get(),
+        f"button": button_entry.get(),
+        f"link": link_entry.get(),
+        f"switch": switch_var.get(),
+        f"tcnr": tcnr.get(),
+        f"tzlj": tzlj.get()
         
     }
     with open("config.json", "w") as f:
@@ -349,6 +371,16 @@ def center_window(window, window_width, window_height):
 
 def paste_text(entry):
     entry.event_generate("<<Paste>>")
+def on_switch():
+    if switch_var.get() == 1:
+        tcnr.config(state=tk.NORMAL)
+        tzlj.config(state=tk.NORMAL)
+        load_config()
+    else:
+        tcnr.config(state=tk.DISABLED)
+        tzlj.config(state=tk.DISABLED)
+        tcnr_var.set("")
+        tzlj_var.set("")
 window = tk.Tk()
 window.title("久久狂切直链1.2    TG：nb_789")
 
@@ -362,12 +394,28 @@ center_window(window, window_width, window_height)
 title_entry = tk.Entry(window, width=15, bg="#7B68EE", fg="#ffffff")
 title_entry.grid(row=1, column=1)
 title_entry.insert(tk.END, "这是标题")
-link_entry = tk.Entry(window, width=35, bg="#7B68EE", fg="#ffffff")
+link_entry = tk.Entry(window, width=25, bg="#7B68EE", fg="#ffffff")
 link_entry.grid(row=1, column=2)
 link_entry.insert(tk.END, "https://这是链接.com")
-button_entry = tk.Entry(window, width=10, bg="#7B68EE", fg="#ffffff")
+button_entry = tk.Entry(window, width=20, bg="#7B68EE", fg="#ffffff")
 button_entry.grid(row=1, column=3)
 button_entry.insert(tk.END, "这是按钮")
+
+switch_var = tk.IntVar()
+switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, command=on_switch, bg="#7B68EE", fg="#D8BFD8")
+switch.grid(row=2, column=1)
+
+
+tcnr_var = tk.StringVar()
+tcnr = tk.Entry(window, width=25, bg="#7B68EE", fg="#ffffff", state=tk.DISABLED, disabledbackground="#7B68EE", disabledforeground="#ffffff", textvariable=tcnr_var)
+tcnr.grid(row=2, column=2)
+
+
+tzlj_var = tk.StringVar()
+tzlj = tk.Entry(window, width=20, bg="#7B68EE", fg="#ffffff", state=tk.DISABLED, disabledbackground="#7B68EE", disabledforeground="#ffffff", textvariable=tzlj_var)
+tzlj.grid(row=2, column=3)
+
+
 
 # 创建上下文菜单
 context_menu = tk.Menu(window, tearoff=0)
