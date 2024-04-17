@@ -180,7 +180,10 @@ def load_config():
             tcnr_var.set(config["tcnr"])
             tzlj_var.set(config["tzlj"])
         else:
-             print("")
+             tcnr.insert(0, "弹窗内容")
+             tcnr.config(insertbackground="#ffffff", insertborderwidth=1)
+             tzlj.insert(0, "跳转链接")
+             tzlj.config(insertbackground="#ffffff", insertborderwidth=1)
             
             
             
