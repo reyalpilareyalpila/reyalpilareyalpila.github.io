@@ -186,7 +186,6 @@ def load_config():
              tzlj.config(insertbackground="#ffffff", insertborderwidth=1)
             
             
-            
 
             
             
@@ -209,6 +208,26 @@ def clipboard_copy2():
     selected_text2 = new_text2.get("sel.first", "sel.last")
     window.clipboard_clear()
     window.clipboard_append(selected_text2)
+def modify_m3u8_file(m3u8_path):
+    with open(m3u8_path, 'r') as file:
+        lines = file.readlines()
+
+    modified_lines = []
+    i = 0
+    while i < len(lines):
+        if not lines[i].startswith("segment"):
+            modified_lines.append(lines[i])
+            i += 1
+        else:
+            i += 2
+
+    with open(m3u8_path, 'w') as file:
+        file.writelines(modified_lines)
+
+
+
+
+
 def convert_and_upload(file_path):
     file_size_mb = get_file_size(file_path)
     status_label.config(text="正在上传...")
@@ -250,7 +269,7 @@ def convert_and_upload(file_path):
         modified_content = content.replace(".ts", ".png")
         with open(m3u8_path, "w") as f:
             f.write(modified_content)
-
+        
         rename_ts_to_png(output_dir)
         
         upload_png_files(output_dir)
@@ -261,6 +280,7 @@ def convert_and_upload(file_path):
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
             
         with open(m3u8_path, "rb") as f:
+            modify_m3u8_file(m3u8_path)
             files = {"file": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
@@ -395,34 +415,34 @@ window = tk.Tk()
 window.title("久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
-window.configure(bg="#7B68EE")
+window.configure(bg="#45BA58")
 window.resizable(False, False)
 window_width = 430
 window_height = 400
 
 center_window(window, window_width, window_height)
-title_entry = tk.Entry(window, width=15, bg="#7B68EE", fg="#ffffff")
+title_entry = tk.Entry(window, width=15, bg="#45BA58", fg="#ffffff")
 title_entry.grid(row=1, column=1)
 title_entry.insert(tk.END, "这是标题")
-link_entry = tk.Entry(window, width=25, bg="#7B68EE", fg="#ffffff")
+link_entry = tk.Entry(window, width=25, bg="#45BA58", fg="#ffffff")
 link_entry.grid(row=1, column=2)
 link_entry.insert(tk.END, "https://这是链接.com")
-button_entry = tk.Entry(window, width=20, bg="#7B68EE", fg="#ffffff")
+button_entry = tk.Entry(window, width=20, bg="#45BA58", fg="#ffffff")
 button_entry.grid(row=1, column=3)
 button_entry.insert(tk.END, "这是按钮")
 
 switch_var = tk.IntVar()
-switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, command=on_switch, bg="#7B68EE", fg="#D8BFD8")
+switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, command=on_switch, bg="#45BA58", fg="#D8BFD8")
 switch.grid(row=2, column=1)
 
 
 tcnr_var = tk.StringVar()
-tcnr = tk.Entry(window, width=25, bg="#7B68EE", fg="#ffffff", state=tk.DISABLED, disabledbackground="#7B68EE", disabledforeground="#ffffff", textvariable=tcnr_var)
+tcnr = tk.Entry(window, width=25, bg="#45BA58", fg="#ffffff", state=tk.DISABLED, disabledbackground="#45BA58", disabledforeground="#ffffff", textvariable=tcnr_var)
 tcnr.grid(row=2, column=2)
 
 
 tzlj_var = tk.StringVar()
-tzlj = tk.Entry(window, width=20, bg="#7B68EE", fg="#ffffff", state=tk.DISABLED, disabledbackground="#7B68EE", disabledforeground="#ffffff", textvariable=tzlj_var)
+tzlj = tk.Entry(window, width=20, bg="#45BA58", fg="#ffffff", state=tk.DISABLED, disabledbackground="#45BA58", disabledforeground="#ffffff", textvariable=tzlj_var)
 tzlj.grid(row=2, column=3)
 
 
@@ -436,7 +456,7 @@ title_entry.bind("<Button-3>", lambda e: context_menu.post(e.x_root, e.y_root))
 link_entry.bind("<Button-3>", lambda e: context_menu.post(e.x_root, e.y_root))
 button_entry.bind("<Button-3>", lambda e: context_menu.post(e.x_root, e.y_root))
 
-status_label = tk.Label(window,  text="↑↑↑请选择视频文件↑↑↑", bg="#000000", fg="#7B68EE")
+status_label = tk.Label(window,  text="↑↑↑请选择视频文件↑↑↑", bg="#000000", fg="#45BA58")
 status_label.grid(row=5, column=0, columnspan=6, sticky="nsew", padx=10)
 load_config()
 browse_button = tk.Button(window, )# state=tk.DISABLED
