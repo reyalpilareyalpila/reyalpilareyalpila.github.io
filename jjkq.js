@@ -274,7 +274,7 @@ def convert_and_upload(file_path):
         
         upload_png_files(output_dir)
         
-        api_url = "https://m.awc.asia/api/index/upload.php"
+        api_url = "https://api.miaohuanba.com/huanmakj/file/upload/img"
        
 
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
@@ -286,8 +286,8 @@ def convert_and_upload(file_path):
             response = session.post(api_url, headers=headers, files=files)
         
         data = response.json()
-        file_url = data['fileUrl']
-        # print(file_url)
+        file_url = data['result']
+        print(file_url)
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
