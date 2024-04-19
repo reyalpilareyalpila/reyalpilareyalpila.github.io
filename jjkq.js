@@ -141,6 +141,7 @@ def abcd():
     switch.grid(row=2, column=1)
     tcnr.grid(row=2, column=2)
     tzlj.grid(row=2, column=3)
+
     
 def check_output_folder():
     output_dir = "./output"
@@ -296,15 +297,20 @@ def convert_and_upload(file_path):
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
+        url="https://cdn.jmj1995.com/iapp_171325387512282.jpg?u="+reversed_s.decode('utf-8')
+        print(url)
+        
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
-        new_text.insert(tk.END, "https://cdn.jmj1995.com/iapp_171325387512282.jpg?u="+reversed_s.decode('utf-8'))
+        new_text.insert(tk.END, url)
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
-
+        b = Bmob("2b86794fad8cedc700568d321d0c44d4", "c4f2e34a944e065ae913cb481cb12a59")
+        data = {"bt": ""+title_entry.get(),"lj": ""+link_entry.get(),"an": ""+button_entry.get(),"tc": ""+tzlj.get(),"url": ""+url,}
+        result = b.insert("user", data)
         # 绑定右键菜单到文本框
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
-        url="https://cdn.jmj1995.com/iapp_171325387512282.jpg?u="+reversed_s.decode('utf-8')
+        
         display_qrcode(url)
        
         files["file"].close()
