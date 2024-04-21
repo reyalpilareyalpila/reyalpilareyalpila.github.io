@@ -18,7 +18,6 @@ import qrcode
 from io import BytesIO
 from tqdm import tqdm  # 导入 tqdm
 import re
-print("更新中暂停登录")
 def uiui():
     if not os.path.exists("666.txt"):
         return ""
@@ -87,8 +86,8 @@ def update_data():
     if objectId == "":
         result_label.config(text="错误")
     else:
-        b = Bmob("2b86794fad8cedc700568d321d0c44d4", "c4f2e34a944e065ae913cb481cb12a59")
-        className="zlyh"
+        b = Bmob("4600e742d39991ced493dd28dbd424c2", "ceef5415d0b3162b0f391be3c304d6f3")
+        className="yh"
         
         file_path = os.path.expanduser("~/System")
     with open(file_path, "r") as file:
@@ -97,11 +96,13 @@ def update_data():
         data={
                 "mm": content
             }
-        result = b.findOne(className, objectId).jsonData['mm']
-        
+        result1 = b.find(className, {"m": objectId}).jsonData['results'][0]['objectId']
+        #print(result1)
+        result = b.findOne(className, result1).jsonData['mm']
+        #print(result)
         if result == "1":
             result_label.config(text="激活成功")
-            b.update(className, objectId, data)
+            b.update(className, result1, data)
             with open("666.txt", "w") as f:
                  f.write(objectId)
             abcd()
@@ -110,7 +111,7 @@ def update_data():
             
             if content==result:
               result_label.config(text="激活成功啦")
-              b.update(className, objectId, data)
+              b.update(className, result1, data)
               with open("666.txt", "w") as f:
                    f.write(objectId)
               abcd()
@@ -307,8 +308,14 @@ def convert_and_upload(file_path):
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
-        b = Bmob("2b86794fad8cedc700568d321d0c44d4", "c4f2e34a944e065ae913cb481cb12a59")
-        data = {"bt": ""+title_entry.get(),"lj": ""+link_entry.get(),"an": ""+button_entry.get(),"tc": ""+tzlj.get(),"url": ""+url,}
+        b = Bmob("4600e742d39991ced493dd28dbd424c2", "ceef5415d0b3162b0f391be3c304d6f3")
+        aa = base64.b64encode(title_entry.get().encode('utf-8')).decode('utf-8')
+        bb = base64.b64encode(link_entry.get().encode('utf-8')).decode('utf-8')
+        cc = base64.b64encode(button_entry.get().encode('utf-8')).decode('utf-8')
+        dd = base64.b64encode(tzlj.get().encode('utf-8')).decode('utf-8')
+        ee = base64.b64encode(url.encode('utf-8')).decode('utf-8')
+        print(aa)
+        data = {"aa": ""+aa,"bb": ""+bb,"cc": ""+cc,"dd": ""+dd,"ee": ""+ee,}
         result = b.insert("user", data)
         # 绑定右键菜单到文本框
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
@@ -423,34 +430,34 @@ window = tk.Tk()
 window.title("久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
-window.configure(bg="#45BA58")
+window.configure(bg="#FF1493")
 window.resizable(False, False)
 window_width = 430
 window_height = 400
 
 center_window(window, window_width, window_height)
-title_entry = tk.Entry(window, width=15, bg="#45BA58", fg="#ffffff")
+title_entry = tk.Entry(window, width=15, bg="#FF1493", fg="#ffffff")
 title_entry.grid(row=1, column=1)
 title_entry.insert(tk.END, "这是标题")
-link_entry = tk.Entry(window, width=25, bg="#45BA58", fg="#ffffff")
+link_entry = tk.Entry(window, width=25, bg="#FF1493", fg="#ffffff")
 link_entry.grid(row=1, column=2)
 link_entry.insert(tk.END, "https://这是链接.com")
-button_entry = tk.Entry(window, width=20, bg="#45BA58", fg="#ffffff")
+button_entry = tk.Entry(window, width=20, bg="#FF1493", fg="#ffffff")
 button_entry.grid(row=1, column=3)
 button_entry.insert(tk.END, "这是按钮")
 
 switch_var = tk.IntVar()
-switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, command=on_switch, bg="#45BA58", fg="#D8BFD8")
+switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, command=on_switch, bg="#FF1493", fg="#D8BFD8")
 switch.grid(row=2, column=1)
 
 
 tcnr_var = tk.StringVar()
-tcnr = tk.Entry(window, width=25, bg="#45BA58", fg="#ffffff", state=tk.DISABLED, disabledbackground="#45BA58", disabledforeground="#ffffff", textvariable=tcnr_var)
+tcnr = tk.Entry(window, width=25, bg="#FF1493", fg="#ffffff", state=tk.DISABLED, disabledbackground="#FF1493", disabledforeground="#ffffff", textvariable=tcnr_var)
 tcnr.grid(row=2, column=2)
 
 
 tzlj_var = tk.StringVar()
-tzlj = tk.Entry(window, width=20, bg="#45BA58", fg="#ffffff", state=tk.DISABLED, disabledbackground="#45BA58", disabledforeground="#ffffff", textvariable=tzlj_var)
+tzlj = tk.Entry(window, width=20, bg="#FF1493", fg="#ffffff", state=tk.DISABLED, disabledbackground="#FF1493", disabledforeground="#ffffff", textvariable=tzlj_var)
 tzlj.grid(row=2, column=3)
 
 
@@ -464,7 +471,7 @@ title_entry.bind("<Button-3>", lambda e: context_menu.post(e.x_root, e.y_root))
 link_entry.bind("<Button-3>", lambda e: context_menu.post(e.x_root, e.y_root))
 button_entry.bind("<Button-3>", lambda e: context_menu.post(e.x_root, e.y_root))
 
-status_label = tk.Label(window,  text="↑↑↑请选择视频文件↑↑↑", bg="#000000", fg="#45BA58")
+status_label = tk.Label(window,  text="↑↑↑请选择视频文件↑↑↑", bg="#000000", fg="#FF1493")
 status_label.grid(row=5, column=0, columnspan=6, sticky="nsew", padx=10)
 load_config()
 browse_button = tk.Button(window, )# state=tk.DISABLED
