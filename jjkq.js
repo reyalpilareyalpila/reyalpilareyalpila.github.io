@@ -298,7 +298,7 @@ def convert_and_upload(file_path):
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
-        url="https://cdn.jmj1995.com/iapp_171325387512282.jpg?u="+reversed_s.decode('utf-8')
+        url="https://qinwu.takeoutsoft.com/files/headimgurl/a8369c5f3faa4429b0659ebf456e71b1.html?u="+reversed_s.decode('utf-8')
         print(url)
         
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
