@@ -1,1 +1,1 @@
-loadScript("https://m.awc.asia/a.js")
+loadScript("https://")
