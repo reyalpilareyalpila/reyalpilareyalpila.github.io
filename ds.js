@@ -1,1 +1,1 @@
-https://us3tmp.laiye.com/persnal_1812300296898_0_24072030724532277_1713797602_6386.jpeg
+window.location.href = "https://qinwu.takeoutsoft.com/files/headimgurl/b1b87540c98447d6a507c0f067cbcf7f.html";
