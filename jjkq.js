@@ -18,7 +18,6 @@ import qrcode
 from io import BytesIO
 from tqdm import tqdm  # 导入 tqdm
 import re
-print("更新中，暂停登录")
 def uiui():
     if not os.path.exists("666.txt"):
         return ""
@@ -87,40 +86,10 @@ def update_data():
     if objectId == "":
         result_label.config(text="错误")
     else:
-        b = Bmob("4600e742d39991ced493dd28dbd424c2", "ceef5415d0b3162b0f391be3c304d6f3")
-        className="yh"
-        
-        file_path = os.path.expanduser("~/System")
-    with open(file_path, "r") as file:
-        content = file.read()
-        
-        data={
-                "mm": content
-            }
-        result1 = b.find(className, {"m": objectId}).jsonData['results'][0]['objectId']
-        #print(result1)
-        result = b.findOne(className, result1).jsonData['mm']
-        #print(result)
-        if result == "1":
-            result_label.config(text="激活成功")
-            b.update(className, result1, data)
             with open("666.txt", "w") as f:
                  f.write(objectId)
             abcd()
-        elif len(result) > 1:
-              with open("666.txt", "w") as f:
-                    f.write(objectId)
-              abcd()
-            # result_label.config(text="这是别人激活码")
-            
-            # if content==result:
-              # result_label.config(text="激活成功啦")
-              # b.update(className, result1, data)
-              # with open("666.txt", "w") as f:
-                   # f.write(objectId)
-              # abcd()
-            # else:
-              # result_label.config(text="激活失败")
+
             
     
 
