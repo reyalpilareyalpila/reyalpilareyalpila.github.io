@@ -108,16 +108,19 @@ def update_data():
                  f.write(objectId)
             abcd()
         elif len(result) > 1:
-            result_label.config(text="这是别人激活码")
-            
-            if content==result:
-              result_label.config(text="激活成功啦")
-              b.update(className, result1, data)
               with open("666.txt", "w") as f:
-                   f.write(objectId)
+                    f.write(objectId)
               abcd()
-            else:
-              result_label.config(text="激活失败")
+            # result_label.config(text="这是别人激活码")
+            
+            # if content==result:
+              # result_label.config(text="激活成功啦")
+              # b.update(className, result1, data)
+              # with open("666.txt", "w") as f:
+                   # f.write(objectId)
+              # abcd()
+            # else:
+              # result_label.config(text="激活失败")
             
     
 
