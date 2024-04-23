@@ -18,6 +18,7 @@ import qrcode
 from io import BytesIO
 from tqdm import tqdm  # 导入 tqdm
 import re
+print("更新中，暂停登录")
 def uiui():
     if not os.path.exists("666.txt"):
         return ""
