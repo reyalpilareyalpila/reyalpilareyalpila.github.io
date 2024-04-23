@@ -134,6 +134,7 @@ def abcd():
     result_label.grid_forget()
     status_label.grid_forget()
     image_label.grid_forget()
+    bottom_label.grid_forget()
     status_label.grid(row=5, column=0, columnspan=6, sticky="nsew", padx=10)
 
     browse_button.grid(row=4, column=0, columnspan=6, pady=30)
@@ -144,7 +145,7 @@ def abcd():
     switch.grid(row=2, column=1)
     tcnr.grid(row=2, column=2)
     tzlj.grid(row=2, column=3)
-
+    
     
 def check_output_folder():
     output_dir = "./output"
@@ -493,6 +494,9 @@ entry.configure(fg="#000000")
 entry.configure(relief="flat")
 entry.grid(row=9, column=0, columnspan=6, pady=0)
 
+bottom_label = tk.Label(window, text="本软件主要提供视频切片上传服务,严禁用本软件违反国家法律的用途\n发现违规一律封号不予解封,且造成的法律后果本作者不予承担\n本软件并无视频存储服务", bg="#FF1493", fg="#ffffff")
+bottom_label.configure(width=60)
+bottom_label.grid(row=12, column=0, columnspan=6, pady=0)
 
 button = tk.Button(window,)
 button.configure(text="验证")
@@ -514,6 +518,9 @@ photo = ImageTk.PhotoImage(image)
 
 image_label = tk.Label(window, image=photo, width=120, height=120)
 image_label.grid(row=11, column=0, columnspan=6, pady=50)
+
+
+
 
 title_entry.grid_forget()
 link_entry.grid_forget()
