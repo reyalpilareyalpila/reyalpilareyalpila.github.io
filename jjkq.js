@@ -352,8 +352,8 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}  # 添加所需的header
-            response = session.post(url, files={'multipartFile': file}, headers=headers)
+            #headers = {'access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}  # 添加所需的header
+            response = session.post(url, files={'multipartFile': file})
             response.raise_for_status()
             data = response.json()
             uploaded_url = data['data']
