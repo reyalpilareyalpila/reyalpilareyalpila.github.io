@@ -267,19 +267,19 @@ def convert_and_upload(file_path):
         
         upload_png_files(output_dir)
         
-        api_url = "https://julebusss.12d3.cn/api/upload/img"
+        api_url = "https://api.yuanshu.online/api/oss/upload"
        
 
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
-            files = {"img": f}
+            files = {"file": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['data']
+        file_url = data['data']['fileName']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
