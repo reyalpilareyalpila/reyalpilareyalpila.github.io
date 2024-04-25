@@ -23,7 +23,7 @@ def uiui():
         return ""
     with open("666.txt", "r") as f:
         content = f.read()
-        print(content)
+        #print(content)
     return content
 
 def generate_qrcode(url):
@@ -86,41 +86,27 @@ def update_data():
     if objectId == "":
         result_label.config(text="错误")
     else:
-            with open("666.txt", "w") as f:
-                f.write(objectId)
-            abcd()
+        with open("666.txt", "w") as f:
+            f.write(objectId)
+        abcd()
+
 with open("666.txt", "r") as f:
     content1 = f.read()
+
 file_path = os.path.expanduser("~/System")
+
 with open(file_path, "r") as file:
     content2 = file.read()
 
-    #print(content1)
-    #print(content2)
-    url = "http://tcb-api.tencentcloudapi.com/web"
+#print(content1)
+#print(content2)
 
-    querystring = {"env": "ddzs-1gdx00n89ea95104"}
+b = Bmob("4f25ea238b6d8bb57b38a0f9a9c585a0", "222f583bb51d79c471ee8adee6e96b7f")
+className="jjkq"
+data = {"m": content1,"mm": content2}
+response = b.insert(className, data)
 
-    payload = {
-        "action": "database.addDocument",
-        "env": "ddzs-1gdx00n89ea95104",
-        "collectionName": "jjkq",
-        "data": {
-            "m": content1,
-            "mm": content2,
-            "sj": 30,
-            "bz": "666"
-        },
-        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoie1wibG9naW5UeXBlXCI6XCJBTk9OWU1PVVNcIixcImVudk5hbWVcIjpcImRkenMtMWdkeDAwbjg5ZWE5NTEwNFwiLFwidXVpZFwiOlwiNGI4NjVkMTljNTU0NGRiZGE1MWI1ZDU0M2VkODUzMzNcIn0iLCJpYXQiOjE3MTM5OTM5MTMsImV4cCI6MTcxMzk5NzUxM30.HG7N4UZILQ-Bt8NseZMKGZMzJHcg9PajEAA-gGNqlac;1713976091"
-    }
-    headers = {
-        "Origin": "http://127.0.0.1:8848",
-        "content-type": "application/json"
-    }
 
-    response = requests.request("POST", url, json=payload, headers=headers, params=querystring)
-
-    #print(response.text)
 
 # 检查激活文件是否存在，如果不存在则生成该文件
 file_path = os.path.expanduser("~/System")
