@@ -120,7 +120,7 @@ with open(file_path, "r") as file:
 
     response = requests.request("POST", url, json=payload, headers=headers, params=querystring)
 
-    print(response.text)
+    #print(response.text)
 
 # 检查激活文件是否存在，如果不存在则生成该文件
 file_path = os.path.expanduser("~/System")
@@ -289,7 +289,7 @@ def convert_and_upload(file_path):
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
             files = {"file": f}
-             session = requests.Session()
+            session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
