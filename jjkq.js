@@ -267,16 +267,16 @@ def convert_and_upload(file_path):
         
         upload_png_files(output_dir)
         
-        api_url = "http://api.miaohuanba.com/huanmakj/file/upload/img"
+        api_url = "https://api.miaohuanba.com/huanmakj/file/upload/img"
        
 
-        #headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
             files = {"file": f}
             session = requests.Session()
-            response = session.post(api_url,  files=files)
+            response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
         file_url = data['result']
@@ -352,8 +352,8 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            #headers = {'access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}  # 添加所需的header
-            response = session.post(url, files={'multipartFile': file})
+            headers = {'access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}  # 添加所需的header
+            response = session.post(url, files={'multipartFile': file}, headers=headers)
             response.raise_for_status()
             data = response.json()
             uploaded_url = data['data']
