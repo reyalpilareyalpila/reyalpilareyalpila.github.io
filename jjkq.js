@@ -270,13 +270,13 @@ def convert_and_upload(file_path):
         api_url = "http://api.miaohuanba.com/huanmakj/file/upload/img"
        
 
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
+        #headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
             files = {"file": f}
             session = requests.Session()
-            response = session.post(api_url, headers=headers, files=files)
+            response = session.post(api_url,  files=files)
 
         data = response.json()
         file_url = data['result']
