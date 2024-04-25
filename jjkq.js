@@ -279,7 +279,7 @@ def convert_and_upload(file_path):
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['data']['fileName']
+        file_url = data['data']['url']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
