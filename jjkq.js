@@ -270,7 +270,7 @@ def convert_and_upload(file_path):
         api_url = "https://api.yuanshu.online/api/oss/upload"
        
 
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3','mchid':'1','token':'54aa4bf7-0fd6-4ecc-b7fe-f98a9008fc2b'}
+        headers = {'Authorization':'YS eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImZkZjljMTg2LTc5ZWMtNDU4Ni04ZDQzLWExMmUwYmNhNzM5NSJ9.eX9PbRrTGOw-6ibuN1S0uLZADm6TBVwOnhQ4atFvCoFHNUFAmQKJQQXzYWzjZmtu8JfIQikLsOxrCwjZAUIm1w'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
