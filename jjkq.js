@@ -267,19 +267,19 @@ def convert_and_upload(file_path):
         
         upload_png_files(output_dir)
         
-        api_url = "https://api.yuanshu.online/api/oss/upload"
+        api_url = "https://open.ttkuan.com/materialapp/pic/upload"
        
 
         headers = {'Authorization':'YS eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImZkZjljMTg2LTc5ZWMtNDU4Ni04ZDQzLWExMmUwYmNhNzM5NSJ9.eX9PbRrTGOw-6ibuN1S0uLZADm6TBVwOnhQ4atFvCoFHNUFAmQKJQQXzYWzjZmtu8JfIQikLsOxrCwjZAUIm1w'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
-            files = {"file": f}
+            files = {"pic": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['data']['url']
+        file_url = data['data']['picPath']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
