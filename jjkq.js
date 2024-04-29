@@ -83,28 +83,31 @@ def display_qrcode(url):
     new_text2.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
 def update_data():
     objectId = entry.get()
-    if objectId == "":
+    if not objectId:
         result_label.config(text="错误")
-    else:
+        return
+
+    b = Bmob("4f25ea238b6d8bb57b38a0f9a9c585a0", "222f583bb51d79c471ee8adee6e96b7f")
+    className = "jjkq"
+    file_path = os.path.expanduser("~/System")
+
+    with open(file_path, "r") as file:
+        content = file.read()
+
+    data = {"mm": content}
+    result1 = b.find(className, {"m": objectId}).jsonData['results'][0]['objectId']
+    result = b.findOne(className, result1).jsonData['mm']
+    print(result)
+    if result == "1" or content == result:
+        result_label.config(text="激活成功")
+        b.update(className, result1, data)
         with open("666.txt", "w") as f:
             f.write(objectId)
         abcd()
+    else:
+        result_label.config(text="激活失败")
 
-with open("666.txt", "r") as f:
-    content1 = f.read()
 
-file_path = os.path.expanduser("~/System")
-
-with open(file_path, "r") as file:
-    content2 = file.read()
-
-#print(content1)
-#print(content2)
-
-b = Bmob("4f25ea238b6d8bb57b38a0f9a9c585a0", "222f583bb51d79c471ee8adee6e96b7f")
-className="jjkq"
-data = {"m": content1,"mm": content2}
-response = b.insert(className, data)
 
 
 
