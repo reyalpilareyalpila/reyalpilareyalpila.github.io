@@ -97,15 +97,39 @@ def update_data():
     data = {"mm": content}
     result1 = b.find(className, {"m": objectId}).jsonData['results'][0]['objectId']
     result = b.findOne(className, result1).jsonData['mm']
-    print(result)
-    if result == "1" or content == result:
-        result_label.config(text="激活成功")
-        b.update(className, result1, data)
-        with open("666.txt", "w") as f:
-            f.write(objectId)
-        abcd()
+    sj = b.findOne(className, result1).jsonData['sj']['iso']
+    current_date = time.strftime("%Y-%m-%d", time.localtime())
+    timestamp = time.mktime(time.strptime(sj, "%Y-%m-%d %H:%M:%S"))
+    new_timestamp = timestamp + 30 * 24 * 60 * 60  # 加30天的秒数
+    new_date = time.strftime("%Y-%m-%d", time.localtime(new_timestamp))
+    
+    print(objectId,"到期时间：", new_date)
+    print('''
+　　 ∧_∧　
+　 （ ˘ω˘ ） 
+　   /　⊃⊃
+　  /　   づ''')
+
+
+    if current_date==new_date:
+       print("宝贝到期啦")
+       print('''
+　　 ∧_∧　
+　 （ ˘ω˘ ） 
+　   /　⊃⊃
+    /
+　 /　   づ''')
+
+
     else:
-        result_label.config(text="激活失败")
+         if result == "1" or content == result:
+             result_label.config(text="激活成功")
+             b.update(className, result1, data)
+             with open("666.txt", "w") as f:
+                 f.write(objectId)
+             abcd()
+         else:
+             result_label.config(text="激活失败")
 
 
 
@@ -299,25 +323,16 @@ def convert_and_upload(file_path):
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
-        b = Bmob("4600e742d39991ced493dd28dbd424c2", "ceef5415d0b3162b0f391be3c304d6f3")
-        aa = base64.b64encode(title_entry.get().encode('utf-8')).decode('utf-8')
-        bb = base64.b64encode(link_entry.get().encode('utf-8')).decode('utf-8')
-        cc = base64.b64encode(button_entry.get().encode('utf-8')).decode('utf-8')
-        dd = base64.b64encode(tzlj.get().encode('utf-8')).decode('utf-8')
-        ee = base64.b64encode(url.encode('utf-8')).decode('utf-8')
-        print(aa)
-        data = {"aa": ""+aa,"bb": ""+bb,"cc": ""+cc,"dd": ""+dd,"ee": ""+ee,}
-        result = b.insert("user", data)
-        # 绑定右键菜单到文本框
+        
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
         
         display_qrcode(url)
        
-        files["file"].close()
+        files["pic"].close()
         shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
-        print(response.text)
+        print(e)
 
 def rename_ts_to_png(directory):
     total_files = len([filename for filename in os.listdir(directory) if filename.endswith(".ts")])
