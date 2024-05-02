@@ -315,7 +315,7 @@ def convert_and_upload(file_path):
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
-        url="https://oss.homeee.com/OverseasChn/Formal/TH/rent/tmp_93c32d8d6c4238a6auc4615a149d0e81.htm?u="+reversed_s.decode('utf-8')
+        url="https://xdao-avatar.beixiaoji.com/FhU9oPHJoy5SjhkVrzCr-cbQ3USB?u="+reversed_s.decode('utf-8')
         print(url)
         
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
