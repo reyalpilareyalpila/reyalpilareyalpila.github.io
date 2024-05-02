@@ -16,12 +16,14 @@ from bmob import *
 from PIL import Image, ImageDraw, ImageFont, ImageTk
 import qrcode
 from io import BytesIO
+from tqdm import tqdm  # 导入 tqdm
+import re
 def uiui():
     if not os.path.exists("666.txt"):
         return ""
     with open("666.txt", "r") as f:
         content = f.read()
-        print(content)
+        #print(content)
     return content
 
 def generate_qrcode(url):
@@ -57,21 +59,20 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("temp_qrcode.png")
-    api_url = "https://msmarket.msx.digitalyili.com/gateway/api/commons/common/file/upload"
+    api_url = "https://www.yougouco.com/utility/attachment/mobile/upload"
        
 
     headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
-    cookies = {'Cookie': 'pgv_pvid=5642411380; RK=GuHIkztdRE; ptcz=55f76c636759d585028341a8965e62a4ecf379ceb35c48ad8303dd44b5598d73; qq_domain_video_guid_verify=2deb7a01cf61ff45; tvfe_boss_uuid=98d2b9377fd02b1d; fqm_pvqid=24e12e13-ce37-43fb-9c59-e7c9f537de89; o_cookie=2422483200; _t_qbtool_uid=5e7777d68c61102cebcd0993377988cb; _ga=GA1.1.643483315.1698692210; _qimei_fingerprint=33c3b4cf3ae1328ae6037e0496506054; _qimei_h38=527f7c30bb543a73124a7a9a0200000f11781a; _qimei_q36=; _clck=m33bp|1|fid|0; pac_uid=1_2422483200; iip=0; _qimei_uuid42=181131014311007a66b1e1563fe8153f6d0f0f5563; ptui_loginuin=1521239297; _horizon_uid=774abaf8-d852-4e2d-a3c9-ae0e5d8ad069; __wj_userid=774abaf8-d852-4e2d-a3c9-ae0e5d8ad069; _ga_TPFW0KPXC1=GS1.1.1712353781.4.0.1712353781.0.0.0; _qpsvr_localtk=0.22877773635703536; pgv_info=ssid=s8335269226; uin=o1521239297; skey=@90i7h41ts; verifysession=h016139cdb03f10fc6d5e0b5903dcf5512783d5b04e4b22bc22f342b03fa7cf42ba913bfe20fea9de94; _horizon_sid=783bac91-0f0e-446b-ac99-bd0efb552ae4; _tucao_session=dTlSc2UyZndVbUgzNTlzRVQ0cGhMY0JIRTRiVjhvU1gvSzAzVFhVSDNYK21STjJhODBDeUJUSTBPamZOZVo4eEkyait0QllBZUJOYmtia0lweUtFSzhHZEFFd3UyYVh4WExSNXZ3cjJlMHNjN3V1OFJiSkdiSlBXT2o4dmZUdm9JRzBiblhzUlFONWVVQ2FQempXamtRPT0%3D--9JvGZKXRLFLl5Mysje9pFA%3D%3D--MGZmM2QxNjU1MTNiNWE2MTg4NmI0MzE3YWZjZWQzNmM%3D; _tucao_custom_info=ZE8wZG5yZHdBMFduVlZsZi9LZEZSNDNaOCsvcW5ybmN3emMyWVo4U3l0cTVjV0NIcTg2TGJwMFFnc05MTHNWSg%3D%3D--dxELfdrrGxuZV6DVUKkKWw%3D%3D--MmNiMjI3MzZhNGVhZjI5ZDI0NmVkNWMwNmQxODZkOGQ%3D'}
-
+    cookies = {'Cookie': ''}
     with open("temp_qrcode.png", "rb") as f:
-        files = {"multipartFile": f}
-        data = {"type": "post"}
+        files = {"file": f}
+        data = {"type": "image"}
         session = requests.Session()
         response = session.post(api_url, headers=headers , cookies=cookies,files=files,data=data)
         print(response)
     data = response.json()
     print(data)
-    file_url666 = data['data']
+    file_url666 = data['data']['url']
     print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
@@ -82,37 +83,57 @@ def display_qrcode(url):
     new_text2.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
 def update_data():
     objectId = entry.get()
-    if objectId == "":
+    if not objectId:
         result_label.config(text="错误")
-    else:
-        b = Bmob("2b86794fad8cedc700568d321d0c44d4", "c4f2e34a944e065ae913cb481cb12a59")
-        className="zlyh"
-        
-        file_path = os.path.expanduser("~/System")
+        return
+
+    b = Bmob("4f25ea238b6d8bb57b38a0f9a9c585a0", "222f583bb51d79c471ee8adee6e96b7f")
+    className = "jjkq"
+    file_path = os.path.expanduser("~/System")
+
     with open(file_path, "r") as file:
         content = file.read()
-        abcd()
-        data={
-                "mm": content
-            }
-        result = b.findOne(className, objectId).jsonData['mm']
-        
-        if result == "1":
-            result_label.config(text="激活成功")
-            b.update(className, objectId, data)
-            with open("666.txt", "w") as f:
-                 f.write(objectId)
-            abcd()
-        elif len(result) > 1:
-            result_label.config(text="这是别人激活码")
-            
-            if content==result:
-              result_label.config(text="激活成功啦")
-              abcd()
-            else:
-              result_label.config(text="激活失败")
-            
+
+    data = {"mm": content}
+    result1 = b.find(className, {"m": objectId}).jsonData['results'][0]['objectId']
+    result = b.findOne(className, result1).jsonData['mm']
+    sj = b.findOne(className, result1).jsonData['sj']['iso']
+    current_date = time.strftime("%Y-%m-%d", time.localtime())
+    timestamp = time.mktime(time.strptime(sj, "%Y-%m-%d %H:%M:%S"))
+    new_timestamp = timestamp + 30 * 24 * 60 * 60  # 加30天的秒数
+    new_date = time.strftime("%Y-%m-%d", time.localtime(new_timestamp))
     
+    print(objectId,"到期时间：", new_date)
+    print('''
+　　 ∧_∧　
+　 （ ˘ω˘ ） 
+　   /　⊃⊃
+　  /　   づ''')
+
+
+    if current_date==new_date:
+       print("宝贝到期啦")
+       print('''
+　　 ∧_∧　
+　 （ ˘ω˘ ） 
+　   /　⊃⊃
+    /
+　 /　   づ''')
+
+
+    else:
+         if result == "1" or content == result:
+             result_label.config(text="激活成功")
+             b.update(className, result1, data)
+             with open("666.txt", "w") as f:
+                 f.write(objectId)
+             abcd()
+         else:
+             result_label.config(text="激活失败")
+
+
+
+
 
 # 检查激活文件是否存在，如果不存在则生成该文件
 file_path = os.path.expanduser("~/System")
@@ -128,6 +149,7 @@ def abcd():
     result_label.grid_forget()
     status_label.grid_forget()
     image_label.grid_forget()
+    bottom_label.grid_forget()
     status_label.grid(row=5, column=0, columnspan=6, sticky="nsew", padx=10)
 
     browse_button.grid(row=4, column=0, columnspan=6, pady=30)
@@ -135,6 +157,11 @@ def abcd():
     button_entry.grid(row=1, column=3)
     link_entry.grid(row=1, column=2)
     title_entry.grid(row=1, column=1)
+    switch.grid(row=2, column=1)
+    tcnr.grid(row=2, column=2)
+    tzlj.grid(row=2, column=3)
+    
+    
 def check_output_folder():
     output_dir = "./output"
     if os.path.exists(output_dir):
@@ -145,9 +172,13 @@ check_output_folder()
 
 def save_config():
     config = {
-        "title": title_entry.get(),
-        "button": button_entry.get(),
-        "link": link_entry.get()
+        f"title": title_entry.get(),
+        f"button": button_entry.get(),
+        f"link": link_entry.get(),
+        f"switch": switch_var.get(),
+        f"tcnr": tcnr.get(),
+        f"tzlj": tzlj.get()
+        
     }
     with open("config.json", "w") as f:
         json.dump(config, f)
@@ -162,7 +193,25 @@ def load_config():
             button_entry.insert(0, config["button"])
             link_entry.delete(0, tk.END)
             link_entry.insert(0, config["link"])
+
+            
+            
+        if 'tcnr' in config and 'tzlj' in config:
+            tcnr_var.set(config["tcnr"])
+            tzlj_var.set(config["tzlj"])
+        else:
+             tcnr.insert(0, "弹窗内容")
+             tcnr.config(insertbackground="#ffffff", insertborderwidth=1)
+             tzlj.insert(0, "跳转链接")
+             tzlj.config(insertbackground="#ffffff", insertborderwidth=1)
+            
+            
+
+            
+            
+               
     except FileNotFoundError:
+        
         status_label.config(text="")
 def get_file_size(file_path):
     size_in_bytes = os.path.getsize(file_path)
@@ -179,6 +228,25 @@ def clipboard_copy2():
     selected_text2 = new_text2.get("sel.first", "sel.last")
     window.clipboard_clear()
     window.clipboard_append(selected_text2)
+def modify_m3u8_file(m3u8_path):
+    with open(m3u8_path, 'r') as file:
+        lines = file.readlines()
+
+    modified_lines = []
+    i = 0
+    while i < len(lines):
+        if not lines[i].startswith("segment"):
+            modified_lines.append(lines[i])
+            i += 1
+        else:
+            i += 2
+
+    with open(m3u8_path, 'w') as file:
+        file.writelines(modified_lines)
+
+
+
+
 
 def convert_and_upload(file_path):
     file_size_mb = get_file_size(file_path)
@@ -214,7 +282,6 @@ def convert_and_upload(file_path):
         
         status_label.config(text=f"●●●正在上传：{segment_count}个切片，共：{file_size_mb} MB（不要退出）●●●")
         window.update_idletasks()
-        
         m3u8_path = os.path.join(output_dir, "666.m3u8")
         with open(m3u8_path, "r") as f:
             content = f.read()
@@ -222,7 +289,7 @@ def convert_and_upload(file_path):
         modified_content = content.replace(".ts", ".png")
         with open(m3u8_path, "w") as f:
             f.write(modified_content)
-
+        
         rename_ts_to_png(output_dir)
         
         upload_png_files(output_dir)
@@ -233,35 +300,39 @@ def convert_and_upload(file_path):
         headers = {'Authorization':'YS eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImZkZjljMTg2LTc5ZWMtNDU4Ni04ZDQzLWExMmUwYmNhNzM5NSJ9.eX9PbRrTGOw-6ibuN1S0uLZADm6TBVwOnhQ4atFvCoFHNUFAmQKJQQXzYWzjZmtu8JfIQikLsOxrCwjZAUIm1w'}
             
         with open(m3u8_path, "rb") as f:
+            modify_m3u8_file(m3u8_path)
             files = {"pic": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
         file_url = data['data']['picPath']
-        print(file_url)
-
-        btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url
-
+        if switch_var.get()==1:
+            btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
+        else:
+            btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+""+",,"+""
+        print(btfile)
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
+        url="https://xdao-avatar.beixiaoji.com/FhU9oPHJoy5SjhkVrzCr-cbQ3USB?u="+reversed_s.decode('utf-8')
+        print(url)
+        
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
-        new_text.insert(tk.END, "https://zkqx.sdlczq.cn/xdgtwx/upload/common/c04b2a59545dd1cc01e37310e3123d5c.html?u="+reversed_s.decode('utf-8'))
+        new_text.insert(tk.END, url)
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
         right_click_menu.add_command(label="复制", command=clipboard_copy)
-
-        # 绑定右键菜单到文本框
+        
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
-        url="https://zkqx.sdlczq.cn/xdgtwx/upload/common/c04b2a59545dd1cc01e37310e3123d5c.html?u="+reversed_s.decode('utf-8')
+        
         display_qrcode(url)
        
-        files["file"].close()
+        files["pic"].close()
         shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
-        print(response.text)
+        print(e)
 
 def rename_ts_to_png(directory):
     total_files = len([filename for filename in os.listdir(directory) if filename.endswith(".ts")])
@@ -278,38 +349,28 @@ def upload_png_files(output_dir):
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
 
-    for i, filename in enumerate(png_files):
+    def upload_and_update(filename):
         url = upload_png_file(base_url, os.path.join(output_dir, filename))
         if url:
             update_m3u8_file(m3u8_path, filename, url)
-            print(f"Uploaded {filename} successfully.")
-            # 获取当前标签的文本
-            current_text = status_label.cget("text")
-            if current_text.endswith("png"):
+        return url
 
-                new_text = current_text[:-16]
-            else:
+    with ThreadPoolExecutor() as executor:
+        results = list(tqdm(executor.map(upload_and_update, png_files), total=total_files, desc="Uploading files"))
+        
+    with open("777.txt", "w") as f:
+        for url in results:
+            f.write(url + "\n")
+        window.update()
 
-                
-                new_text = current_text + f" {filename}"
-
-
-            status_label.config(text=new_text)
-            window.update_idletasks()
-            
-        else:
-            print(f"Failed to upload {filename}.")
-
-    print("All files uploaded.")
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
-
+    
 def upload_png_file(url, png_path):
     try:
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
             headers = {'access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}  # 添加所需的header
-            
             response = session.post(url, files={'multipartFile': file}, headers=headers)
             response.raise_for_status()
             data = response.json()
@@ -317,7 +378,6 @@ def upload_png_file(url, png_path):
             return uploaded_url
     except Exception as e:
         print(f"上传文件 {png_path} 失败：{e}")
-
 
 def update_m3u8_file(m3u8_path, filename, url):
     
@@ -330,11 +390,14 @@ def update_m3u8_file(m3u8_path, filename, url):
 def browse_file():
     filetypes = [('视频文件', '*.mp4;*.avi;*.mkv;*.mov')]
     file_path = filedialog.askopenfilename(filetypes=filetypes)
-    
+    print(switch_var.get())
     config = {
-        "title": title_entry.get(),
-        "button": button_entry.get(),
-        "link": link_entry.get()
+        f"title": title_entry.get(),
+        f"button": button_entry.get(),
+        f"link": link_entry.get(),
+        f"switch": switch_var.get(),
+        f"tcnr": tcnr.get(),
+        f"tzlj": tzlj.get()
         
     }
     with open("config.json", "w") as f:
@@ -359,8 +422,18 @@ def center_window(window, window_width, window_height):
 
 def paste_text(entry):
     entry.event_generate("<<Paste>>")
+def on_switch():
+    if switch_var.get() == 1:
+        tcnr.config(state=tk.NORMAL)
+        tzlj.config(state=tk.NORMAL)
+        load_config()
+    else:
+        tcnr.config(state=tk.DISABLED)
+        tzlj.config(state=tk.DISABLED)
+        tcnr_var.set("")
+        tzlj_var.set("")
 window = tk.Tk()
-window.title("久久狂切直链1.1    TG：nb_789")
+window.title("久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
@@ -369,15 +442,31 @@ window_width = 430
 window_height = 400
 
 center_window(window, window_width, window_height)
-title_entry = tk.Entry(window, width=20, bg="#FF1493", fg="#ffffff")
+title_entry = tk.Entry(window, width=15, bg="#FF1493", fg="#ffffff")
 title_entry.grid(row=1, column=1)
 title_entry.insert(tk.END, "这是标题")
-link_entry = tk.Entry(window, width=20, bg="#FF1493", fg="#ffffff")
+link_entry = tk.Entry(window, width=25, bg="#FF1493", fg="#ffffff")
 link_entry.grid(row=1, column=2)
 link_entry.insert(tk.END, "https://这是链接.com")
 button_entry = tk.Entry(window, width=20, bg="#FF1493", fg="#ffffff")
 button_entry.grid(row=1, column=3)
 button_entry.insert(tk.END, "这是按钮")
+
+switch_var = tk.IntVar()
+switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, command=on_switch, bg="#FF1493", fg="#D8BFD8")
+switch.grid(row=2, column=1)
+
+
+tcnr_var = tk.StringVar()
+tcnr = tk.Entry(window, width=25, bg="#FF1493", fg="#ffffff", state=tk.DISABLED, disabledbackground="#FF1493", disabledforeground="#ffffff", textvariable=tcnr_var)
+tcnr.grid(row=2, column=2)
+
+
+tzlj_var = tk.StringVar()
+tzlj = tk.Entry(window, width=20, bg="#FF1493", fg="#ffffff", state=tk.DISABLED, disabledbackground="#FF1493", disabledforeground="#ffffff", textvariable=tzlj_var)
+tzlj.grid(row=2, column=3)
+
+
 
 # 创建上下文菜单
 context_menu = tk.Menu(window, tearoff=0)
@@ -410,6 +499,9 @@ entry.configure(fg="#000000")
 entry.configure(relief="flat")
 entry.grid(row=9, column=0, columnspan=6, pady=0)
 
+bottom_label = tk.Label(window, text="本软件主要提供视频切片上传服务,严禁用本软件违反国家法律的用途\n发现违规一律封号不予解封,且造成的法律后果本作者不予承担\n本软件并无视频存储服务", bg="#FF1493", fg="#ffffff")
+bottom_label.configure(width=60)
+bottom_label.grid(row=12, column=0, columnspan=6, pady=0)
 
 button = tk.Button(window,)
 button.configure(text="验证")
@@ -420,7 +512,7 @@ button.configure(relief="flat")
 button.grid(row=10, column=0, columnspan=6, pady=0)
 
 
-url = "https://cache.ip138.com/static/image/public/logo.png"
+url = "https://edu-30130.sz.gfp.tencent-cloud.com/ide/185e76a07f6c15f8e69127be15128abd.png"
 random_number = random.randint(1, 100)  # 生成1到100之间的随机整数
 new_url = url +"?"+ str(random_number) # 替换为你的图片链接
 response = requests.get(new_url)
@@ -429,12 +521,18 @@ img_data = response.content
 image = Image.open(BytesIO(img_data))
 photo = ImageTk.PhotoImage(image)
 
-image_label = tk.Label(window, image=photo, width=400, height=250)
+image_label = tk.Label(window, image=photo, width=120, height=120)
 image_label.grid(row=11, column=0, columnspan=6, pady=50)
+
+
+
 
 title_entry.grid_forget()
 link_entry.grid_forget()
 button_entry.grid_forget()
 browse_button.grid_forget()
 status_label.grid_forget()
+switch.grid_forget()
+tcnr.grid_forget()
+tzlj.grid_forget()
 window.mainloop()
