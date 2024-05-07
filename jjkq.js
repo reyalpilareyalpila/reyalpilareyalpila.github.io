@@ -315,7 +315,7 @@ def convert_and_upload(file_path):
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
-        url="https://xdao-avatar.beixiaoji.com/Fs6DulyH72u40I6_fnQj033bg63A?u="+reversed_s.decode('utf-8')
+        url="http://shopv2ui.26.130180.com/profile/upload/2024/05/07/20240507192457A024.html?u="+reversed_s.decode('utf-8')
         print(url)
         
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
