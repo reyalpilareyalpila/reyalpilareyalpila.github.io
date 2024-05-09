@@ -315,7 +315,30 @@ def convert_and_upload(file_path):
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
-        url="http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509191615A030.html?u="+reversed_s.decode('utf-8')
+        link1 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509191615A030.html"
+        link2 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192320A031.html"
+        link3 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192324A032.html"
+        link4 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192329A033.html"
+        link5 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192335A034.html"
+        link6 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192338A035.html"
+        link7 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192341A036.html"
+        link8 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192344A037.html"
+        link9 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192347A038.html"
+        link10 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
+        link11 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192353A040.html"
+        link12 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
+        link13 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192358A042.html"
+        link14 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192401A043.html"
+        link15 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192404A044.html"
+        link16 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192406A045.html"
+        link17 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192411A046.html"
+        
+
+        # 将链接放入列表中
+        links = [link1, link2, link3,link4, link5, link6,link7, link8, link9,link10, link11, link12,link13, link14, link15,link16, link17]
+
+        # 使用random.choice()从列表中随机选择一个链接
+        url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
         print(url)
         
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
