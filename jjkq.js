@@ -515,7 +515,7 @@ switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, comman
 switch.grid(row=2, column=1)
 
 switchbb_var = tk.IntVar()
-switchbb = tk.Checkbutton(window, text="切换普通版", variable=switchbb_var, bg="#FF1493", fg="#D8BFD8")
+switchbb = tk.Checkbutton(window, text="切换上传模式2", variable=switchbb_var, bg="#FF1493", fg="#D8BFD8")
 switchbb.grid(row=125, column=0)
 
 tcnr_var = tk.StringVar()
