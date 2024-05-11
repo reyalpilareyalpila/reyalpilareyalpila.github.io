@@ -111,7 +111,7 @@ def update_data():
 　  /　   づ''')
 
 
-    if current_date==new_date:
+    if current_date>=new_date:
        print("宝贝到期啦")
        print('''
 　　 ∧_∧　
