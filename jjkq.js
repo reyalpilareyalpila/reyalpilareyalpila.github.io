@@ -150,6 +150,7 @@ def abcd():
     status_label.grid_forget()
     image_label.grid_forget()
     bottom_label.grid_forget()
+    switchbb.grid_forget()
     status_label.grid(row=5, column=0, columnspan=6, sticky="nsew", padx=10)
 
     browse_button.grid(row=4, column=0, columnspan=6, pady=30)
@@ -292,7 +293,7 @@ def convert_and_upload(file_path):
         
         rename_ts_to_png(output_dir)
         
-        upload_png_files(output_dir)
+        upload_png_files666(output_dir)
         
         api_url = "https://open.ttkuan.com/materialapp/pic/upload"
        
@@ -365,8 +366,43 @@ def rename_ts_to_png(directory):
             new_filename = os.path.splitext(filename)[0] + ".png"
             new_path = os.path.join(directory, new_filename)
             os.rename(old_path, new_path)
+def upload_png_files666(output_dir):
+     print(switchbb_var.get())
+     if switchbb_var.get() == 1:
+        upload_png_files2(output_dir)
+     else:
+         upload_png_files1(output_dir)
+         
+def upload_png_files2(output_dir):
+    base_url = "https://mms-fansclub.marschina.com/index.php?store_id=2&r=api/default/upload-image"
+    m3u8_path = os.path.join(output_dir, "666.m3u8")
+    png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
+    total_files = len(png_files)
+    for i, filename in enumerate(png_files):
+     while True:
+        url = upload_png_file(base_url, os.path.join(output_dir, filename))
+        if url:
+            update_m3u8_file(m3u8_path, filename, url)
+            filename = filename[8:-4]
+            filename = str(int(filename) + 1).zfill(3)
+            print(f"以上传 {filename} 个.")
+            # 获取当前标签的文本
+            current_text = status_label.cget("text")
+            if current_text.endswith("png"):
+                new_text = current_text[:-16]
+            else:
+                new_text = current_text[:-3] + filename
 
-def upload_png_files(output_dir):
+            status_label.config(text=new_text)
+            window.update_idletasks()
+            break
+        else:
+            print(f"Failed to upload {filename}. Retrying...")
+
+    
+
+    status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
+def upload_png_files1(output_dir):
     base_url = "https://mms-fansclub.marschina.com/index.php?store_id=2&r=api/default/upload-image"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
@@ -387,7 +423,6 @@ def upload_png_files(output_dir):
         window.update()
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
-    
 def upload_png_file(url, png_path):
     try:
         with open(png_path, 'rb') as file:
@@ -455,6 +490,7 @@ def on_switch():
         tzlj.config(state=tk.DISABLED)
         tcnr_var.set("")
         tzlj_var.set("")
+
 window = tk.Tk()
 window.title("久久狂切直链1.2    TG：nb_789")
 
@@ -463,7 +499,6 @@ window.configure(bg="#FF1493")
 window.resizable(False, False)
 window_width = 430
 window_height = 400
-
 center_window(window, window_width, window_height)
 title_entry = tk.Entry(window, width=15, bg="#FF1493", fg="#ffffff")
 title_entry.grid(row=1, column=1)
@@ -479,6 +514,9 @@ switch_var = tk.IntVar()
 switch = tk.Checkbutton(window, text="弹窗显示", variable=switch_var, command=on_switch, bg="#FF1493", fg="#D8BFD8")
 switch.grid(row=2, column=1)
 
+switchbb_var = tk.IntVar()
+switchbb = tk.Checkbutton(window, text="切换普通版", variable=switchbb_var, bg="#FF1493", fg="#D8BFD8")
+switchbb.grid(row=125, column=0)
 
 tcnr_var = tk.StringVar()
 tcnr = tk.Entry(window, width=25, bg="#FF1493", fg="#ffffff", state=tk.DISABLED, disabledbackground="#FF1493", disabledforeground="#ffffff", textvariable=tcnr_var)
