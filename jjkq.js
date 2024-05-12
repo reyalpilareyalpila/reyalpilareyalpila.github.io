@@ -103,7 +103,7 @@ def update_data():
     new_timestamp = timestamp + 30 * 24 * 60 * 60  # 加30天的秒数
     new_date = time.strftime("%Y-%m-%d", time.localtime(new_timestamp))
     
-    print(objectId,"到期时间：", new_date)
+    print(objectId,"到期时间1：", new_date)
     print('''
 　　 ∧_∧　
 　 （ ˘ω˘ ） 
@@ -423,6 +423,7 @@ def upload_png_files1(output_dir):
         window.update()
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
+
 def upload_png_file(url, png_path):
     try:
         with open(png_path, 'rb') as file:
@@ -436,6 +437,14 @@ def upload_png_file(url, png_path):
             return uploaded_url
     except Exception as e:
         print(f"上传文件 {png_path} 失败：{e}")
+        slice_num = int(re.findall(r'\d+', str(e))[0])
+        if slice_num > 0:
+            previous_slice_num = slice_num - 1
+            previous_png_path = os.path.join(output_dir, f"{previous_slice_num}.png")
+            previous_url = upload_png_file(base_url, previous_png_path)
+            if previous_url:
+                update_m3u8_file(m3u8_path, f"{slice_num}.png", previous_url)
+            return previous_url
 
 def update_m3u8_file(m3u8_path, filename, url):
     
