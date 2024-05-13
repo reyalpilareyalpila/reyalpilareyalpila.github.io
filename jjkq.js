@@ -295,19 +295,19 @@ def convert_and_upload(file_path):
         
         upload_png_files666(output_dir)
         
-        api_url = "https://wx.duodanke.com/wx_v1/utils/upload_image"
+        api_url = "https://open.ttkuan.com/materialapp/pic/upload"
        
 
         headers = {'Authorization':'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93eC5kdW9kYW5rZS5jb21cL3d4X3YxXC9hdXRoXC9sb2dpbiIsImlhdCI6MTcxNTUxNjEzMiwiZXhwIjoxNzE1NjAyNTMyLCJuYmYiOjE3MTU1MTYxMzIsImp0aSI6IkFIYkFNbnp4Q0MxWHByNWsiLCJzdWIiOjUzNjAxNDEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.9i-68S1JgoWGsoRUjtKJKffN34aKCO0fONQ6MVLoUdQ'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
-            files = {"file": f}
+            files = {"pic": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['result']['img_src']
+        file_url = data['data']['picPath']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
@@ -352,7 +352,7 @@ def convert_and_upload(file_path):
         
         display_qrcode(url)
        
-        files["file"].close()
+        files["pic"].close()
         shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
