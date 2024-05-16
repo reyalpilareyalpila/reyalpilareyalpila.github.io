@@ -300,7 +300,7 @@ def convert_and_upload(file_path):
         headers = {'Tenant-Id':'7656490026'}
             
         with open(m3u8_path, "rb") as f:
-            modify_m3u8_file(m3u8_path)
+            
             files = {"file": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
@@ -491,7 +491,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("2久久狂切直链1.2    TG：nb_789")
+window.title("3久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
