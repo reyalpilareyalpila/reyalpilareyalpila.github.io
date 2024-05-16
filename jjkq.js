@@ -238,12 +238,11 @@ def modify_m3u8_file(m3u8_path):
     while i < len(lines):
         if not lines[i].startswith("segment"):
             modified_lines.append(lines[i])
-            i += 1
-        else:
-            i += 2
+        i += 1
 
     with open(m3u8_path, 'w') as file:
         file.writelines(modified_lines)
+
 
 
 
@@ -353,7 +352,7 @@ def convert_and_upload(file_path):
         display_qrcode(url)
        
         files["file"].close()
-        shutil.rmtree(output_dir)
+        
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
         print(e)
@@ -438,17 +437,12 @@ def upload_png_file(url, png_path):
         print(f"修复 {png_path} 文件：{e}成功")
         return ""
 def update_m3u8_file(m3u8_path, filename, url):
-    while True:
-        try:
-            with open(m3u8_path, "r") as f:
-                content = f.read()
-            modified_content = content.replace(filename, url)
-            with open(m3u8_path, "w") as f:
-                f.write(modified_content)
-            break
-        except IOError as e:
-            print("文件被占用，等待重试...")
-            time.sleep(1)
+    
+    with open(m3u8_path, "r") as f:
+        content = f.read()
+    modified_content = content.replace(filename, url)
+    with open(m3u8_path, "w") as f:
+        f.write(modified_content)
 
 def browse_file():
     filetypes = [('视频文件', '*.mp4;*.avi;*.mkv;*.mov')]
@@ -497,7 +491,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("1久久狂切直链1.2    TG：nb_789")
+window.title("2久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
