@@ -438,12 +438,12 @@ def upload_png_file(url, png_path):
         print(f"修复 {png_path} 文件：{e}成功")
         return ""
 def update_m3u8_file(m3u8_path, filename, url):
-    
-    with open(m3u8_path, "r") as f:
-        content = f.read()
-    modified_content = content.replace(filename, url)
-    with open(m3u8_path, "w") as f:
-        f.write(modified_content)
+    temp_file_path = m3u8_path + ".tmp"  # 临时文件路径
+    with open(m3u8_path, "r") as input_file, open(temp_file_path, "w") as output_file:
+        for line in input_file:
+            modified_line = line.replace(filename, url)
+            output_file.write(modified_line)
+    os.replace(temp_file_path, m3u8_path)  # 替换原始文件
 
 def browse_file():
     filetypes = [('视频文件', '*.mp4;*.avi;*.mkv;*.mov')]
@@ -492,7 +492,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("久久2狂切直链1.2    TG：nb_789")
+window.title("久久3狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
