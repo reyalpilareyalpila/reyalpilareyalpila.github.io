@@ -438,12 +438,14 @@ def upload_png_file(url, png_path):
         print(f"修复 {png_path} 文件：{e}成功")
         return ""
 def update_m3u8_file(m3u8_path, filename, url):
-    
     with open(m3u8_path, "r") as f:
         content = f.read()
     modified_content = content.replace(filename, url)
+    if not url.strip():
+        raise ValueError("新的URL为空")
     with open(m3u8_path, "w") as f:
         f.write(modified_content)
+
 
 def browse_file():
     filetypes = [('视频文件', '*.mp4;*.avi;*.mkv;*.mov')]
@@ -596,5 +598,5 @@ status_label.grid_forget()
 switch.grid_forget()
 tcnr.grid_forget()
 tzlj.grid_forget()
-switchbb.grid_forget()
+
 window.mainloop()
