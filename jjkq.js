@@ -353,7 +353,7 @@ def convert_and_upload(file_path):
         display_qrcode(url)
        
         files["file"].close()
-        shutil.rmtree(output_dir)
+        
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
         print(e)
