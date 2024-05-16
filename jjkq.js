@@ -353,7 +353,7 @@ def convert_and_upload(file_path):
         display_qrcode(url)
        
         files["file"].close()
-        #shutil.rmtree(output_dir)
+        shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
         print(e)
@@ -434,10 +434,10 @@ def upload_png_files1(output_dir):
 
     update_m3u8_file(m3u8_path, upload_results)
 
-    with open("777.txt", "w") as f:
-        for url in upload_results.values():
-            f.write(url + "\n")
-        window.update()
+    #with open("777.txt", "w") as f:
+        #for url in upload_results.values():
+            #f.write(url + "\n")
+        #window.update()
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
 def upload_png_file(url, png_path):
