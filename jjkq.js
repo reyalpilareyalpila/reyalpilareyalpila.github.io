@@ -398,7 +398,7 @@ def upload_png_files2(output_dir):
             break
         else:
             print(f"Failed to upload {filename}. Retrying...")
-            return ""
+            
     
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
@@ -492,7 +492,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("久久1狂切直链1.2    TG：nb_789")
+window.title("久久2狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
