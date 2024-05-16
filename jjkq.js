@@ -438,12 +438,17 @@ def upload_png_file(url, png_path):
         print(f"修复 {png_path} 文件：{e}成功")
         return ""
 def update_m3u8_file(m3u8_path, filename, url):
-    
-    with open(m3u8_path, "r") as f:
-        content = f.read()
-    modified_content = content.replace(filename, url)
-    with open(m3u8_path, "w") as f:
-        f.write(modified_content)
+    while True:
+        try:
+            with open(m3u8_path, "r") as f:
+                content = f.read()
+            modified_content = content.replace(filename, url)
+            with open(m3u8_path, "w") as f:
+                f.write(modified_content)
+            break
+        except IOError as e:
+            print("文件被占用，等待重试...")
+            time.sleep(1)
 
 def browse_file():
     filetypes = [('视频文件', '*.mp4;*.avi;*.mkv;*.mov')]
