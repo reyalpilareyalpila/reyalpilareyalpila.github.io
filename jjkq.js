@@ -353,7 +353,7 @@ def convert_and_upload(file_path):
         display_qrcode(url)
        
         files["file"].close()
-        shutil.rmtree(output_dir)
+        #shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
         print(e)
@@ -402,23 +402,40 @@ def upload_png_files2(output_dir):
     
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
+import os
+import shutil
+import requests
+
 def upload_png_files1(output_dir):
     base_url = "https://mms-fansclub.marschina.com/index.php?store_id=2&r=api/default/upload-image"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
 
+    def update_m3u8_file(m3u8_path, upload_results):
+        with open(m3u8_path, "r") as f:
+            content = f.read()
+
+        for filename, url in upload_results.items():
+            content = content.replace(filename, url)
+
+        with open(m3u8_path, "w") as f:
+            f.write(content)
+
     def upload_and_update(filename):
         url = upload_png_file(base_url, os.path.join(output_dir, filename))
         if url:
-            update_m3u8_file(m3u8_path, filename, url)
-        return url
+            upload_results[filename] = url
+
+    upload_results = {}  # 上传结果的缓存
 
     with ThreadPoolExecutor() as executor:
-        results = list(tqdm(executor.map(upload_and_update, png_files), total=total_files, desc="Uploading files"))
-        
+        list(tqdm(executor.map(upload_and_update, png_files), total=total_files, desc="Uploading files"))
+
+    update_m3u8_file(m3u8_path, upload_results)
+
     with open("777.txt", "w") as f:
-        for url in results:
+        for url in upload_results.values():
             f.write(url + "\n")
         window.update()
 
@@ -437,15 +454,6 @@ def upload_png_file(url, png_path):
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
         return ""
-def update_m3u8_file(m3u8_path, filename, url):
-    with open(m3u8_path, "r") as f:
-        content = f.read()
-    modified_content = content.replace(filename, url)
-    if not url.strip():
-        raise ValueError("新的URL为空")
-    with open(m3u8_path, "w") as f:
-        f.write(modified_content)
-
 
 def browse_file():
     filetypes = [('视频文件', '*.mp4;*.avi;*.mkv;*.mov')]
@@ -598,5 +606,5 @@ status_label.grid_forget()
 switch.grid_forget()
 tcnr.grid_forget()
 tzlj.grid_forget()
-
+switchbb.grid_forget()
 window.mainloop()
