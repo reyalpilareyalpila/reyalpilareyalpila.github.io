@@ -58,13 +58,13 @@ def display_qrcode(url):
 
 
 # 保存处理后的图片
-    new_img.save("temp_qrcode.png")
+    new_img.save("二维码.png")
     api_url = "https://www.nbnuanyue.com/api/common/upload"
        
 
     headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
     cookies = {'Cookie': ''}
-    with open("temp_qrcode.png", "rb") as f:
+    with open("二维码.png", "rb") as f:
         files = {"file": f}
         data = {"type": "image"}
         session = requests.Session()
