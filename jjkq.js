@@ -229,25 +229,8 @@ def clipboard_copy2():
     selected_text2 = new_text2.get("sel.first", "sel.last")
     window.clipboard_clear()
     window.clipboard_append(selected_text2)
-def modify_m3u8_file(m3u8_path):
-    with open(m3u8_path, 'r') as file:
-        lines = file.readlines()
 
-    modified_lines = []
-    i = 0
-    while i < len(lines):
-        if not lines[i].startswith("segment"):
-            modified_lines.append(lines[i])
-        i += 1
-
-    with open(m3u8_path, 'w') as file:
-        file.writelines(modified_lines)
-
-
-
-
-
-
+    
 def convert_and_upload(file_path):
     file_size_mb = get_file_size(file_path)
     status_label.config(text="正在上传...")
@@ -255,7 +238,6 @@ def convert_and_upload(file_path):
     os.makedirs(output_dir, exist_ok=True)
     status_label.config(text="正在上传...")
     try:
-        
         ffmpeg_path = './ffmpeg.exe'
         command = [
             ffmpeg_path,
@@ -287,6 +269,9 @@ def convert_and_upload(file_path):
             content = f.read()
             
         modified_content = content.replace(".ts", ".png")
+        if not modified_content.strip():
+            raise ValueError("要写入的内容为空")
+        
         with open(m3u8_path, "w") as f:
             f.write(modified_content)
         
@@ -295,12 +280,9 @@ def convert_and_upload(file_path):
         upload_png_files666(output_dir)
         
         api_url = "https://ps.langosoft.cn/keemshop-resource/oss/endpoint/put-file-attach"
-       
-
         headers = {'Tenant-Id':'7656490026'}
             
         with open(m3u8_path, "rb") as f:
-            
             files = {"file": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
@@ -316,26 +298,10 @@ def convert_and_upload(file_path):
         reversed_s = encoded_file_url[::-1]
         global new_text
         link1 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509191615A030.html"
-        link2 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192320A031.html"
-        link3 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192324A032.html"
-        link4 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192329A033.html"
-        link5 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192335A034.html"
-        link6 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192338A035.html"
-        link7 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192341A036.html"
-        link8 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/13/20240513113749A099.html"
-        link9 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192347A038.html"
-        link10 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
-        link11 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192353A040.html"
-        link12 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
-        link13 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192358A042.html"
-        link14 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192401A043.html"
-        link15 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192404A044.html"
-        link16 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192406A045.html"
-        link17 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192411A046.html"
         
 
         # 将链接放入列表中
-        links = [link1, link2, link3,link4, link5, link6,link7, link8, link9,link10, link11, link12,link13, link14, link15,link16, link17]
+        links = [link1]
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
@@ -350,12 +316,16 @@ def convert_and_upload(file_path):
         new_text.bind("<Button-3>", lambda e: right_click_menu.post(e.x_root, e.y_root))
         
         display_qrcode(url)
-       
-        files["file"].close()
         
+        files["file"].close()
+        shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
         print(e)
+
+
+
+
 
 def rename_ts_to_png(directory):
     total_files = len([filename for filename in os.listdir(directory) if filename.endswith(".ts")])
@@ -491,7 +461,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("3久久狂切直链1.2    TG：nb_789")
+window.title("久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
