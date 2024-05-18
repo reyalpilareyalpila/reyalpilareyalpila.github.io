@@ -295,7 +295,7 @@ def convert_and_upload(file_path):
         
         upload_png_files666(output_dir)
         
-        api_url = "https://ps.langosoft.cn/keemshop-resource/oss/endpoint/put-file-attach"
+        api_url = "https://xyhs.zhisongshu.cn/api/5a63444c41b45"
        
 
         headers = {'Tenant-Id':'7656490026'}
@@ -307,7 +307,7 @@ def convert_and_upload(file_path):
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['data']['link']
+        file_url = data['data']['Url']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
