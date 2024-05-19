@@ -295,19 +295,23 @@ def convert_and_upload(file_path):
         
         upload_png_files666(output_dir)
         
-        api_url = "https://open.ttkuan.com/materialapp/pic/upload"
+        #api_url = "https://westore.nhsoft.cn/mercury/api/third/v1/oss/upload_aliyun_oss?platform=2"
+        api_url = "https://scrm-prod.shuyi.org.cn/saas-gateway/api/agg-trade/v1/upload/"
        
 
         headers = {'Tenant-Id':'7656490026'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
-            files = {"pic": f}
+            #file_name = f"tmp_{''.join(random.choices(string.ascii_letters + string.digits, k=32))}.m3u8"
+            
+            #files = {"file": (file_name, f)}
+            files = {"file": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['data']['picPath']
+        file_url = data['data'][0]['url']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
@@ -352,7 +356,7 @@ def convert_and_upload(file_path):
         
         display_qrcode(url)
        
-        files["pic"].close()
+        files["file"].close()
         shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
