@@ -295,19 +295,19 @@ def convert_and_upload(file_path):
         
         upload_png_files666(output_dir)
         
-        api_url = "https://xyhs.zhisongshu.cn/api/5a63444c41b45"
+        api_url = "https://open.ttkuan.com/materialapp/pic/upload"
        
 
         headers = {'Tenant-Id':'7656490026'}
             
         with open(m3u8_path, "rb") as f:
             modify_m3u8_file(m3u8_path)
-            files = {"file": f}
+            files = {"pic": f}
             session = requests.Session()
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['data']['Url']
+        file_url = data['data']['picPath']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
@@ -352,7 +352,7 @@ def convert_and_upload(file_path):
         
         display_qrcode(url)
        
-        files["file"].close()
+        files["pic"].close()
         shutil.rmtree(output_dir)
     except Exception as e:
         status_label.config(text=f"转换和上传失败：{e}")
