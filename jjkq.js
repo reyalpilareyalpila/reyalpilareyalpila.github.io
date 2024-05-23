@@ -504,7 +504,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("久久狂切直链1.2    TG：nb_789")
+window.title("A久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
