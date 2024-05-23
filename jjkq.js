@@ -409,7 +409,7 @@ import shutil
 import requests
 
 def upload_png_files1(output_dir):
-    base_url = "https://mms-fansclub.marschina.com/index.php?store_id=2&r=api/default/upload-image"
+    base_url = "https://userapi.heaye.shop/api/files/upload"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -447,7 +447,7 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}  # 添加所需的header
+            headers = {'Authorization': 'Bearer oHQMv5bmIQLS3H-Q5NtAVC1PUeSg'}  # 添加所需的header
             response = session.post(url, files={'image': file}, headers=headers)
             response.raise_for_status()
             data = response.json()
