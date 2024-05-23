@@ -448,7 +448,7 @@ def upload_png_file(url, png_path):
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
             headers = {'Authorization': 'Bearer oHQMv5bmIQLS3H-Q5NtAVC1PUeSg'}  # 添加所需的header
-            response = session.post(url, files={'image': file}, headers=headers)
+            response = session.post(url, files={'file': file}, headers=headers)
             response.raise_for_status()
             data = response.json()
             uploaded_url = data['data']['url']
@@ -504,7 +504,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("A久久狂切直链1.2    TG：nb_789")
+window.title("B久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
