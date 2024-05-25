@@ -69,11 +69,11 @@ def display_qrcode(url):
         data = {"type": "image"}
         session = requests.Session()
         response = session.post(api_url, headers=headers , cookies=cookies,files=files,data=data)
-        print(response)
+        #print(response)
     data = response.json()
-    print(data)
+    #print(data)
     file_url666 = data['data']['fullurl']
-    print(file_url666)
+    #print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
     new_text2.insert(tk.END, file_url666)
@@ -271,8 +271,8 @@ def convert_and_upload(file_path):
             '-hls_segment_filename', f'{output_dir}/segment_%03d.ts',
             f"{output_dir}/666.m3u8"
         ]
-        print("正在上传。。。")
-        subprocess.run(command)
+        #print("正在上传。。。")
+        subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         
         segment_count = 0
         for filename in os.listdir(output_dir):
@@ -316,7 +316,7 @@ def convert_and_upload(file_path):
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+""+",,"+""
-        print(btfile)
+        #print(btfile)
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
@@ -342,7 +342,7 @@ def convert_and_upload(file_path):
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
-        print(url)
+        #print(url)
         
         new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
         new_text.insert(tk.END, url)
@@ -409,7 +409,7 @@ import shutil
 import requests
 
 def upload_png_files1(output_dir):
-    base_url = "https://userapi.heaye.shop/api/files/upload"
+    base_url = "https://taixi.cc/web/fronted.php?_mall_id=140&r=api/attachment/upload"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -432,7 +432,7 @@ def upload_png_files1(output_dir):
     upload_results = {}  # 上传结果的缓存
 
     with ThreadPoolExecutor() as executor:
-        list(tqdm(executor.map(upload_and_update, png_files), total=total_files, desc="Uploading files"))
+        list(tqdm(executor.map(upload_and_update, png_files), total=total_files, desc="上传进度："))
 
     update_m3u8_file(m3u8_path, upload_results)
 
@@ -447,8 +447,9 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'Authorization': 'Bearer oHQMv5bmIQLS3H-Q5NtAVC1PUeSg'}  # 添加所需的header
-            response = session.post(url, files={'file': file}, headers=headers)
+            data = {'type': '2'}  # 添加所需的header
+            headers = {'access-token': 'zJ0rFv4MCwbbhRFXyPfsfXeEAuEl+l4xJ+2/dKJZYQuIlLGZVbxhMpDDxLrxsZ4nJ6PE2mIIcH8Y+JHLf2+aeq9pYXNhCdaKHHfq20/KX4g='}  # 添加所需的header
+            response = session.post(url, files={'file': file}, headers=headers, data=data)
             response.raise_for_status()
             data = response.json()
             uploaded_url = data['data']['url']
@@ -504,7 +505,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("B久久狂切直链1.2    TG：nb_789")
+window.title("C久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
