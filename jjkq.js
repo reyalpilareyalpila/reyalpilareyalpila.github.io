@@ -409,7 +409,7 @@ import shutil
 import requests
 
 def upload_png_files1(output_dir):
-    base_url = "https://taixi.cc/web/fronted.php?_mall_id=140&r=api/attachment/upload"
+    base_url = "https://sfa.cic.cn/miniprogram/api/v6/common/ossUpload?filePath=map-miniprogram-web/static/userInfo/headImg"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -447,12 +447,11 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            data = {'type': '2'}  # 添加所需的header
-            headers = {'access-token': 'zJ0rFv4MCwbbhRFXyPfsfXeEAuEl+l4xJ+2/dKJZYQuIlLGZVbxhMpDDxLrxsZ4nJ6PE2mIIcH8Y+JHLf2+aeq9pYXNhCdaKHHfq20/KX4g='}  # 添加所需的header
-            response = session.post(url, files={'file': file}, headers=headers, data=data)
+            headers = {'Authorization': 'Bearer oHQMv5bmIQLS3H-Q5NtAVC1PUeSg'}  # 添加所需的header
+            response = session.post(url, files={'file': file})
             response.raise_for_status()
             data = response.json()
-            uploaded_url = data['data']['url']
+            uploaded_url = data['data']
             return uploaded_url
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
@@ -505,7 +504,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("C久久狂切直链1.2    TG：nb_789")
+window.title("B久久狂切直链1.2    TG：nb_789")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
