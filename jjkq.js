@@ -287,7 +287,7 @@ def convert_and_upload(file_path):
         with open(m3u8_path, "r") as f:
             content = f.read()
             
-        modified_content = content.replace(".ts", ".png")
+        modified_content = content.replace(".ts", ".txt")
         with open(m3u8_path, "w") as f:
             f.write(modified_content)
         
@@ -365,7 +365,7 @@ def rename_ts_to_png(directory):
     for i, filename in enumerate(os.listdir(directory)):
         if filename.endswith(".ts"):
             old_path = os.path.join(directory, filename)
-            new_filename = os.path.splitext(filename)[0] + ".png"
+            new_filename = os.path.splitext(filename)[0] + ".txt"
             new_path = os.path.join(directory, new_filename)
             os.rename(old_path, new_path)
 def upload_png_files666(output_dir):
@@ -409,9 +409,9 @@ import shutil
 import requests
 
 def upload_png_files1(output_dir):
-    base_url = "https://yxphp.ckldzsw.com/index.php/index/Misc/uploadAvatar"
+    base_url = "https://meta.guiji.ai/video-server-api/storage/batchUpload"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
-    png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
+    png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".txt")]
     total_files = len(png_files)
 
     def update_m3u8_file(m3u8_path, upload_results):
@@ -447,12 +447,12 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'Authorization': 'Bearer oHQMv5bmIQLS3H-Q5NtAVC1PUeSg'}  # 添加所需的header
-            response = session.post(url, files={'image': file})
+            headers = {'Authorization': 'Bearer by-9b353272-adb9-4de4-9257-0fb698edb885'}  # 添加所需的header
+            response = session.post(url, files={'file': file},headers=headers)
             response.raise_for_status()
             data = response.json()
-            uploaded_url = data['img']
-            return uploaded_url
+            uploaded_url = data['data'][0]['url']
+            return "https://cdn.guiji.ai"+uploaded_url
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
         return ""
