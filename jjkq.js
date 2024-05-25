@@ -409,7 +409,7 @@ import shutil
 import requests
 
 def upload_png_files1(output_dir):
-    base_url = "https://sfa.cic.cn/miniprogram/api/v6/common/ossUpload?filePath=map-miniprogram-web/static/userInfo/headImg"
+    base_url = "https://yxphp.ckldzsw.com/index.php/index/Misc/uploadAvatar"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -448,10 +448,10 @@ def upload_png_file(url, png_path):
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
             headers = {'Authorization': 'Bearer oHQMv5bmIQLS3H-Q5NtAVC1PUeSg'}  # 添加所需的header
-            response = session.post(url, files={'file': file})
+            response = session.post(url, files={'image': file})
             response.raise_for_status()
             data = response.json()
-            uploaded_url = data['data']
+            uploaded_url = data['img']
             return uploaded_url
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
