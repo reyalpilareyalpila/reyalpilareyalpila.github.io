@@ -296,7 +296,7 @@ def convert_and_upload(file_path):
         upload_png_files666(output_dir)
         
         #api_url = "https://westore.nhsoft.cn/mercury/api/third/v1/oss/upload_aliyun_oss?platform=2"
-        api_url = "https://scrm-prod.shuyi.org.cn/saas-gateway/api/agg-trade/v1/upload/"
+        api_url = "https://saasweb.bld365.com/mp/system/upload/uploadImage"
        
 
         headers = {'Tenant-Id':'7656490026'}
@@ -311,7 +311,7 @@ def convert_and_upload(file_path):
             response = session.post(api_url, headers=headers, files=files)
 
         data = response.json()
-        file_url = data['data'][0]['url']
+        file_url = data['data']
         if switch_var.get()==1:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+tcnr.get()+",,"+tzlj.get()
         else:
