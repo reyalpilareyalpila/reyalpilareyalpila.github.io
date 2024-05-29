@@ -266,7 +266,7 @@ def convert_and_upload(file_path):
             '-start_number', '0',
             "-threads", "1000",
             "-f", "hls",
-            "-hls_time", "1",
+            "-hls_time", "5",
             "-hls_list_size", "0",
             '-hls_segment_filename', f'{output_dir}/segment_%03d.ts',
             f"{output_dir}/666.m3u8"
@@ -404,7 +404,7 @@ import shutil
 import requests
 
 def upload_png_files1(output_dir):
-    base_url = "https://sfa.cic.cn/miniprogram/api/v6/common/ossUpload?filePath=map-miniprogram-web/static/userInfo/headImg"
+    base_url = "https://saasweb.bld365.com/mp/system/upload/uploadImage"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -442,7 +442,7 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'Authorization': 'Bearer by-9b353272-adb9-4de4-9257-0fb698edb885'}  # 添加所需的header
+            headers = {'Authorization': '76446580-0197-4718-b152-7916b6b74e88'}  # 添加所需的header
             response = session.post(url, files={'file': file},headers=headers)
             response.raise_for_status()
             data = response.json()
