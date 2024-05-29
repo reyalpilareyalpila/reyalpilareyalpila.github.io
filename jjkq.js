@@ -296,7 +296,7 @@ def convert_and_upload(file_path):
         upload_png_files666(output_dir)
         
         #api_url = "https://westore.nhsoft.cn/mercury/api/third/v1/oss/upload_aliyun_oss?platform=2"
-        api_url = "https://saasweb.bld365.com/mp/system/upload/uploadImage"
+        api_url = "https://sfa.cic.cn/miniprogram/api/v6/common/ossUpload?filePath=map-miniprogram-web/static/userInfo/headImg"
        
 
         headers = {'Tenant-Id':'7656490026'}
@@ -317,6 +317,7 @@ def convert_and_upload(file_path):
         else:
             btfile=title_entry.get()+",,"+link_entry.get()+",,"+button_entry.get()+",,"+file_url+",,"+""+str(switch_var.get())+""+",,"+""+",,"+""
         #print(btfile)
+        print("上传成功！")
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
@@ -399,9 +400,6 @@ def upload_png_files2(output_dir):
     
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
-import os
-import shutil
-import requests
 
 def upload_png_files1(output_dir):
     base_url = "https://mall.xiangtuan.xyz/api/member/multi/member/uploadAvatar"
@@ -499,7 +497,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("B久久狂切直链1.2    TG：nb_789")
+window.title("久久狂切直链1.2")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
