@@ -372,32 +372,38 @@ def upload_png_files666(output_dir):
          upload_png_files1(output_dir)
          
 def upload_png_files2(output_dir):
-    base_url = "https://mms-fansclub.marschina.com/index.php?store_id=2&r=api/default/upload-image"
+    base_url = "https://mall.xiangtuan.xyz/api/member/multi/member/uploadAvatar"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
-    for i, filename in enumerate(png_files):
-     while True:
+
+    def update_m3u8_file(m3u8_path, upload_results):
+        with open(m3u8_path, "r") as f:
+            content = f.read()
+
+        for filename, url in upload_results.items():
+            content = content.replace(filename, url)
+
+        with open(m3u8_path, "w") as f:
+            f.write(content)
+
+    def upload_and_update(filename):
         url = upload_png_file(base_url, os.path.join(output_dir, filename))
         if url:
-            update_m3u8_file(m3u8_path, filename, url)
-            filename = filename[8:-4]
-            filename = str(int(filename) + 1).zfill(3)
-            print(f"以上传 {filename} 个.")
-            # 获取当前标签的文本
-            current_text = status_label.cget("text")
-            if current_text.endswith("png"):
-                new_text = current_text[:-16]
-            else:
-                new_text = current_text[:-3] + filename
+            upload_results[filename] = url
+            print(f"已上传 {filename} 个.")
 
-            status_label.config(text=new_text)
-            window.update_idletasks()
-            break
-        else:
-            print(f"Failed to upload {filename}. Retrying...")
-            return ""
-    
+    upload_results = {}  # 上传结果的缓存
+
+    with ThreadPoolExecutor() as executor:
+        list(tqdm(executor.map(upload_and_update, png_files), total=total_files, desc="上传进度："))
+
+    update_m3u8_file(m3u8_path, upload_results)
+
+    #with open("777.txt", "w") as f:
+        #for url in upload_results.values():
+            #f.write(url + "")
+        #window.update()
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
 
@@ -601,5 +607,5 @@ status_label.grid_forget()
 switch.grid_forget()
 tcnr.grid_forget()
 tzlj.grid_forget()
-switchbb.grid_forget()
+#switchbb.grid_forget()
 window.mainloop()
