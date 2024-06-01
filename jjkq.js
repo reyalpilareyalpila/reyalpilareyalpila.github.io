@@ -75,7 +75,7 @@ def display_qrcode(url):
     file_url666 = data['data']['fullurl']
     #print(file_url666)
     global new_text2
-    new_text2 = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
+    new_text2 = tk.Text(window, height=3, width=10, bg="#000000", fg="#32CD32")
     new_text2.insert(tk.END, file_url666)
     new_text2.grid(row=8, column=0, columnspan=6, sticky="nsew", pady=10)
     right_click_menu = tk.Menu(window, tearoff=0)
@@ -338,9 +338,9 @@ def convert_and_upload(file_path):
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
-        #print(url)
+        print(url)
         
-        new_text = tk.Text(window, height=5, width=10, bg="#000000", fg="#32CD32")
+        new_text = tk.Text(window, height=8, width=10, bg="#000000", fg="#32CD32")
         new_text.insert(tk.END, url)
         new_text.grid(row=7, column=0, columnspan=6, sticky="nsew", pady=10)
         right_click_menu = tk.Menu(window, tearoff=0)
@@ -607,5 +607,5 @@ status_label.grid_forget()
 switch.grid_forget()
 tcnr.grid_forget()
 tzlj.grid_forget()
-#switchbb.grid_forget()
+switchbb.grid_forget()
 window.mainloop()
