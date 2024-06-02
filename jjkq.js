@@ -59,7 +59,7 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("二维码.png")
-    api_url = "https://www.nbnuanyue.com/api/common/upload"
+    api_url = "https://xinv4.youdawangluo.com/web/index.php?_mall_id=1&r=api/attachment/upload"
        
 
     headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
@@ -72,7 +72,7 @@ def display_qrcode(url):
         #print(response)
     data = response.json()
     #print(data)
-    file_url666 = data['data']['fullurl']
+    file_url666 = data['data']['url']
     #print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=3, width=10, bg="#000000", fg="#32CD32")
@@ -607,5 +607,5 @@ status_label.grid_forget()
 switch.grid_forget()
 tcnr.grid_forget()
 tzlj.grid_forget()
-switchbb.grid_forget()
+#switchbb.grid_forget()
 window.mainloop()
