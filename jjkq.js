@@ -521,7 +521,7 @@ window.config(bg="red")
 window.configure(bg="#FF1493")
 window.resizable(False, False)
 window_width = 430
-window_height = 700
+window_height = 430
 center_window(window, window_width, window_height)
 window.geometry(f"{window_width}x{window_height}")
 
