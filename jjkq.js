@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import filedialog, Label
 from tkinter import messagebox, simpledialog
@@ -158,8 +159,22 @@ def abcd():
     switch.grid(row=2, column=1)
     tcnr.grid(row=2, column=2)
     tzlj.grid(row=2, column=3)
-    
-    
+
+    # 创建底部按钮区域
+    button_frame = tk.Frame(window)
+    button_frame.place(x=0, y=window_height-30, width=window_width, height=30)
+
+# 创建三个按钮
+    button1 = tk.Button(button_frame, text="首页", bg="#FF1493", height=10, fg="#fff")
+    button1.place(x=0, y=0, width=window_width//3, height=30)
+
+    button2 = tk.Button(button_frame, text="图床", bg="#FF1493", height=10, fg="#fff")
+    button2.configure(command=upload_image)
+    button2.place(x=window_width//3, y=0, width=window_width//3, height=30)
+
+    button3 = tk.Button(button_frame, text="我的", bg="#FF1493", height=10, fg="#fff")
+    button3.configure(command=wd)
+    button3.place(x=2*window_width//3, y=0, width=window_width//3, height=30)
 def check_output_folder():
     output_dir = "./output"
     if os.path.exists(output_dir):
@@ -506,8 +521,10 @@ window.config(bg="red")
 window.configure(bg="#FF1493")
 window.resizable(False, False)
 window_width = 430
-window_height = 400
+window_height = 700
 center_window(window, window_width, window_height)
+window.geometry(f"{window_width}x{window_height}")
+
 title_entry = tk.Entry(window, width=15, bg="#FF1493", fg="#ffffff")
 title_entry.grid(row=1, column=1)
 title_entry.insert(tk.END, "这是标题")
@@ -593,9 +610,53 @@ photo = ImageTk.PhotoImage(image)
 image_label = tk.Label(window, image=photo, width=120, height=120)
 image_label.grid(row=11, column=0, columnspan=6, pady=50)
 
+def upload_image():
+        
+        filetypes = [('视频文件', '*.png;*.jpg;*.jpeg;')]
+        file_path = filedialog.askopenfilename(filetypes=filetypes)
+        if file_path:
+            print("正在上传图片....")
+            with open(file_path, 'rb') as f:
+                files = {'file': f}
+                response = requests.post('https://xinv4.youdawangluo.com/web/index.php?_mall_id=1&r=api/attachment/upload', files=files)
+                if response.status_code == 200:
+                    data = response.json()
+                    print(data['data']['url'])
+                    print("全选上方链接Ctrl+C复制")
+def wd():
+    print("敬请期待....")
+def open_new_window():
+    new_window = tk.Toplevel(window)
+    new_window.title("久久图床")
+    new_window.geometry("330x300+{}+{}".format(window.winfo_x()+50, window.winfo_y()+200))
+    tk.Label(new_window, text="这是一个新窗口").pack()
+    new_window.config(bg="red")
+    new_window.configure(bg="#ffffff")
+
+    def upload_image():
+        file_path = filedialog.askopenfilename()
+        if file_path:
+            with open(file_path, 'rb') as f:
+                files = {'file': f}
+                response = requests.post('https://xinv4.youdawangluo.com/web/index.php?_mall_id=1&r=api/attachment/upload', files=files)
+                if response.status_code == 200:
+                    data = response.json()
+                    print(data['data']['url'])
+                    
+                    url_entry.delete(0, tk.END)
+                    url_entry.insert(0, data['data']['url'])
+        return # Prevent the function from completing and closing the new window
+
+    upload_button = tk.Button(new_window, text="选择图片并上传", command=upload_image)
+    upload_button.pack()
+
+    url_entry = tk.Entry(new_window)
+    url_entry.pack()
+    
 
 
 
+#window.after(10, open_new_window)
 title_entry.grid_forget()
 link_entry.grid_forget()
 button_entry.grid_forget()
@@ -605,4 +666,7 @@ switch.grid_forget()
 tcnr.grid_forget()
 tzlj.grid_forget()
 switchbb.grid_forget()
+
+
 window.mainloop()
+
