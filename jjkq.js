@@ -91,45 +91,42 @@ def update_data():
     className = "jjkq"
     file_path = os.path.expanduser("~/System")
 
-    with open(file_path, "r") as file:
-        content = file.read()
+    try:
+        with open(file_path, "r") as file:
+            content = file.read()
 
-    data = {"mm": content}
-    result1 = b.find(className, {"m": objectId}).jsonData['results'][0]['objectId']
-    result = b.findOne(className, result1).jsonData['mm']
-    sj = b.findOne(className, result1).jsonData['sj']['iso']
-    current_date = time.strftime("%Y-%m-%d", time.localtime())
-    timestamp = time.mktime(time.strptime(sj, "%Y-%m-%d %H:%M:%S"))
-    new_timestamp = timestamp + 30 * 24 * 60 * 60  # 加30天的秒数
-    new_date = time.strftime("%Y-%m-%d", time.localtime(new_timestamp))
-    
-    print(objectId,"到期时间：", new_date)
-    print('''
-　　 ∧_∧　
-　 （ ˘ω˘ ） 
-　   /　⊃⊃
-　  /　   づ''')
+        data = {"mm": content}
+        result1 = b.find(className, {"m": objectId}).jsonData['results'][0]['objectId']
+        result = b.findOne(className, result1).jsonData['mm']
+        sj = b.findOne(className, result1).jsonData['sj']['iso']
+        current_date = time.strftime("%Y-%m-%d", time.localtime())
+        timestamp = time.mktime(time.strptime(sj, "%Y-%m-%d %H:%M:%S"))
+        new_timestamp = timestamp + 30 * 24 * 60 * 60  # 加30天的秒数
+        new_date = time.strftime("%Y-%m-%d", time.localtime(new_timestamp))
 
+        print(objectId, "到期时间：", new_date)
+        print('''
+　　     ∧_∧　
+　     （ ˘ω˘ ） 
+　       /　⊃⊃
+　      /　   づ''')
 
-    if current_date>=new_date:
-       print("宝贝到期啦")
-       print('''
-　　 ∧_∧　
-　 （ ˘ω˘ ） 
-　   /　⊃⊃
-    /
-　 /　   づ''')
+        if current_date >= new_date:
+           print("宝贝到期啦")
+        else:
+            if result == "1" or content == result:
+                result_label.config(text="激活成功")
+                b.update(className, result1, data)
+                with open("666.txt", "w") as f:
+                    f.write(objectId)
+                abcd()
+            else:
+                print("激活失败")
+                result_label.config(text="激活失败")
+    except Exception as e:
+        print("激活码错误")
+        result_label.config(text="激活失败")
 
-
-    else:
-         if result == "1" or content == result:
-             result_label.config(text="激活成功")
-             b.update(className, result1, data)
-             with open("666.txt", "w") as f:
-                 f.write(objectId)
-             abcd()
-         else:
-             result_label.config(text="激活失败")
 
 
 
@@ -607,5 +604,5 @@ status_label.grid_forget()
 switch.grid_forget()
 tcnr.grid_forget()
 tzlj.grid_forget()
-#switchbb.grid_forget()
+switchbb.grid_forget()
 window.mainloop()
