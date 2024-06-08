@@ -60,7 +60,7 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("二维码.png")
-    api_url = "https://xinv4.youdawangluo.com/web/index.php?_mall_id=1&r=api/attachment/upload"
+    api_url = "http://pic.2xb.cn/uppic.php?type=qq"
        
 
     headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
@@ -69,11 +69,11 @@ def display_qrcode(url):
         files = {"file": f}
         data = {"type": "image"}
         session = requests.Session()
-        response = session.post(api_url, headers=headers , cookies=cookies,files=files,data=data)
+        response = session.post(api_url, headers=headers , cookies=cookies,files=files)
         #print(response)
     data = response.json()
     #print(data)
-    file_url666 = data['data']['url']
+    file_url666 = data['url']
     #print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=3, width=10, bg="#000000", fg="#32CD32")
@@ -168,7 +168,7 @@ def abcd():
     button1 = tk.Button(button_frame, text="首页", bg="#FF1493", height=10, fg="#fff")
     button1.place(x=0, y=0, width=window_width//3, height=30)
 
-    button2 = tk.Button(button_frame, text="图床", bg="#FF1493", height=10, fg="#fff")
+    button2 = tk.Button(button_frame, text="QQ图床", bg="#FF1493", height=10, fg="#fff")
     button2.configure(command=upload_image)
     button2.place(x=window_width//3, y=0, width=window_width//3, height=30)
 
