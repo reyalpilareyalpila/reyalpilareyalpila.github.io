@@ -69,7 +69,7 @@ def display_qrcode(url):
         files = {"file": f}
         data = {"type": "image"}
         session = requests.Session()
-        response = session.post(api_url, headers=headers , cookies=cookies,files=files)
+        response = session.post(api_url,files=files)
         #print(response)
     data = response.json()
     #print(data)
@@ -638,13 +638,13 @@ def open_new_window():
         if file_path:
             with open(file_path, 'rb') as f:
                 files = {'file': f}
-                response = requests.post('https://xinv4.youdawangluo.com/web/index.php?_mall_id=1&r=api/attachment/upload', files=files)
+                response = requests.post('http://pic.2xb.cn/uppic.php?type=qq', files=files)
                 if response.status_code == 200:
                     data = response.json()
-                    print(data['data']['url'])
+                    print(data['url'])
                     
                     url_entry.delete(0, tk.END)
-                    url_entry.insert(0, data['data']['url'])
+                    url_entry.insert(0, data['url'])
         return # Prevent the function from completing and closing the new window
 
     upload_button = tk.Button(new_window, text="选择图片并上传", command=upload_image)
