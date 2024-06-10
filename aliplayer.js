@@ -6,3 +6,7 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
+fetch('https://jjkq-1300755645.cos.ap-guangzhou.myqcloud.com/888/2XdGlCZW.txt')
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
