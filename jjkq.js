@@ -334,14 +334,18 @@ def convert_and_upload(file_path):
         reversed_s = encoded_file_url[::-1]
         global new_text
         
-        link3 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192324A032.html"
-        link10 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
-        link12 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
-        link14 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612150445A132.html"
-        
-
+        link1 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192324A032.html"
+        link2 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
+        link3 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
+        link4 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612150445A132.html"
+        link5 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151705A133.html"       
+        link6 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151711A134.html"
+        link7 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151715A135.html"
+        link8 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151719A136.html"
+        link9 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151722A137.html"
+        link10 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151900A138.html"
         # 将链接放入列表中
-        links = [link3,link10,link12,link14]
+        links = [link1,link2,link3,link4,link5,link6,link7,link8,link9,link10]
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
