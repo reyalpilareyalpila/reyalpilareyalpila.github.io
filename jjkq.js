@@ -334,16 +334,16 @@ def convert_and_upload(file_path):
         reversed_s = encoded_file_url[::-1]
         global new_text
         
-        link1 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192324A032.html"
-        link2 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
-        link3 = "http://shopv2ui.26.130180.com/profile/upload/2024/05/09/20240509192350A039.html"
-        link4 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612150445A132.html"
-        link5 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151705A133.html"       
-        link6 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151711A134.html"
-        link7 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151715A135.html"
-        link8 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151719A136.html"
-        link9 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151722A137.html"
-        link10 = "http://shopv2ui.26.130180.com/profile/upload/2024/06/12/20240612151900A138.html"
+        link1 = "https://app-cdn.ccd86.com/sinar/img/e6a0813e08144354bad389380dc525d4.html"
+        link2 = "https://app-cdn.ccd86.com/sinar/img/86169e98979b4a3f99c89ff3724ffb47.html"
+        link3 = "https://app-cdn.ccd86.com/sinar/img/407dc223bafe4f85812222bcc53d2e34.html"
+        link4 = "https://app-cdn.ccd86.com/sinar/img/d545c4b0c5bd4d388263e9a42d148870.html"
+        link5 = "https://app-cdn.ccd86.com/sinar/img/6803519c9fb848acb3ff588a02d215e3.html"       
+        link6 = "https://app-cdn.ccd86.com/sinar/img/f881b452395d47e7ba00fc321f5c6388.html"
+        link7 = "https://app-cdn.ccd86.com/sinar/img/a9297cb3e65d4adcbbd2359a3b9781ff.html"
+        link8 = "https://app-cdn.ccd86.com/sinar/img/9d45204c58794216adf9e2b4d9675535.html"
+        link9 = "https://app-cdn.ccd86.com/sinar/img/9a5f5a620cb7428993852fadddc504b9.html"
+        link10 = "https://app-cdn.ccd86.com/sinar/img/16f26f6bee2f49ada96b3d03b0a5f083.html"
         # 将链接放入列表中
         links = [link1,link2,link3,link4,link5,link6,link7,link8,link9,link10]
 
