@@ -339,13 +339,13 @@ def convert_and_upload(file_path):
         link3 = "https://app-cdn.ccd86.com/sinar/img/407dc223bafe4f85812222bcc53d2e34.html"
         link4 = "https://app-cdn.ccd86.com/sinar/img/d545c4b0c5bd4d388263e9a42d148870.html"
         link5 = "https://app-cdn.ccd86.com/sinar/img/6803519c9fb848acb3ff588a02d215e3.html"       
-        link6 = "https://app-cdn.ccd86.com/sinar/img/f881b452395d47e7ba00fc321f5c6388.html"
+        
         link7 = "https://app-cdn.ccd86.com/sinar/img/a9297cb3e65d4adcbbd2359a3b9781ff.html"
         link8 = "https://app-cdn.ccd86.com/sinar/img/9d45204c58794216adf9e2b4d9675535.html"
-        link9 = "https://app-cdn.ccd86.com/sinar/img/9a5f5a620cb7428993852fadddc504b9.html"
+        
         link10 = "https://app-cdn.ccd86.com/sinar/img/16f26f6bee2f49ada96b3d03b0a5f083.html"
         # 将链接放入列表中
-        links = [link1,link2,link3,link4,link5,link6,link7,link8,link9,link10]
+        links = [link1,link2,link3,link4,link5,link7,link8,link10]
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
