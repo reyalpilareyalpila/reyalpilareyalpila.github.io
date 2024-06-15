@@ -60,7 +60,7 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("二维码.png")
-    api_url = "https://xinv4.youdawangluo.com/web/index.php?_mall_id=1&r=api/attachment/upload"
+    api_url = "https://shopapi.sissyun.com.cn/o2o/oss/ashx/upload.ashx"
        
 
     headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
@@ -73,7 +73,7 @@ def display_qrcode(url):
         #print(response)
     data = response.json()
     #print(data)
-    file_url666 = data['data']['url']
+    file_url666 = data['response']
     #print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=3, width=10, bg="#000000", fg="#32CD32")
@@ -334,18 +334,18 @@ def convert_and_upload(file_path):
         reversed_s = encoded_file_url[::-1]
         global new_text
         
-        link1 = "https://app-cdn.ccd86.com/sinar/img/e6a0813e08144354bad389380dc525d4.html"
-        link2 = "https://app-cdn.ccd86.com/sinar/img/86169e98979b4a3f99c89ff3724ffb47.html"
-        link3 = "https://app-cdn.ccd86.com/sinar/img/407dc223bafe4f85812222bcc53d2e34.html"
-        link4 = "https://app-cdn.ccd86.com/sinar/img/d545c4b0c5bd4d388263e9a42d148870.html"
-        link5 = "https://app-cdn.ccd86.com/sinar/img/6803519c9fb848acb3ff588a02d215e3.html"       
-        
-        link7 = "https://app-cdn.ccd86.com/sinar/img/a9297cb3e65d4adcbbd2359a3b9781ff.html"
-        link8 = "https://app-cdn.ccd86.com/sinar/img/9d45204c58794216adf9e2b4d9675535.html"
-        
-        link10 = "https://app-cdn.ccd86.com/sinar/img/16f26f6bee2f49ada96b3d03b0a5f083.html"
+        link1 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4071.html"
+        link2 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4072.html"
+        link3 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4073.html"
+        link4 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4074.html"
+        link5 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4075.html"       
+        link6 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4076.html"
+        link7 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4077.html"
+        link8 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4078.html"
+        link9 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4079.html"
+        link10 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4710.html"
         # 将链接放入列表中
-        links = [link1,link2,link3,link4,link5,link7,link8,link10]
+        links = [link1,link2,link3,link4,link5,link6,link7,link8,link9,link10]
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
@@ -514,7 +514,7 @@ def on_switch():
         tzlj_var.set("")
 
 window = tk.Tk()
-window.title("久久狂切直链1.2")
+window.title("A久久狂切直链1.2")
 
 window.config(bg="red")
 window.configure(bg="#FF1493")
@@ -617,10 +617,10 @@ def upload_image():
             print("正在上传图片....")
             with open(file_path, 'rb') as f:
                 files = {'file': f}
-                response = requests.post('https://xinv4.youdawangluo.com/web/index.php?_mall_id=1&r=api/attachment/upload', files=files)
+                response = requests.post('https://shopapi.sissyun.com.cn/o2o/oss/ashx/upload.ashx', files=files)
                 if response.status_code == 200:
                     data = response.json()
-                    print(data['data']['url'])
+                    print(data['response'])
                     print("全选上方链接Ctrl+C复制")
 def wd():
     print("敬请期待....")
