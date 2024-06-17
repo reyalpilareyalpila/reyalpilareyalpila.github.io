@@ -457,7 +457,7 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'app-login-channel': 'SaaSApplets','auth-token': 'eabe20ed12fe4fe9763a85df6cd883c9'}  # 添加所需的header
+            headers = {'app-login-channel': 'SaaSApplets','auth-token': '1c512b3ea069a688878a7d5ce642b72b'}  # 添加所需的header
             response = session.post(url, files={'file': file},headers=headers)
             response.raise_for_status()
             data = response.json()
