@@ -419,7 +419,7 @@ def upload_png_files2(output_dir):
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
 
 def upload_png_files1(output_dir):
-    base_url = "https://mall.xiangtuan.xyz/api/member/multi/member/uploadAvatar"
+    base_url = "https://m.xiangdian.com/api/member/multi/member/uploadAvatar"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -457,7 +457,7 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'app-login-channel': 'SaaSApplets','auth-token': '1c512b3ea069a688878a7d5ce642b72b'}  # 添加所需的header
+            headers = {'User-Agent': 'PostmanRuntime-ApipostRuntime/1.1.0','auth-token': '0c76402088d7ae6fe4688221c5402a23'}  # 添加所需的header
             response = session.post(url, files={'file': file},headers=headers)
             response.raise_for_status()
             data = response.json()
