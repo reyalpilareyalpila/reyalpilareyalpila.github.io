@@ -419,7 +419,7 @@ def upload_png_files2(output_dir):
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
 
 def upload_png_files1(output_dir):
-    base_url = "https://d2capplet.app.com.cn/miniprogram-api/sinar-api/file/upload/single"
+    base_url = "https://activity.yonghuivip.com/api/web/user/member/upload/image/775?platform=wechatminiprogram"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
     total_files = len(png_files)
@@ -457,11 +457,12 @@ def upload_png_file(url, png_path):
         with open(png_path, 'rb') as file:
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
-            headers = {'User-Agent': 'PostmanRuntime-ApipostRuntime/1.1.0','userToken': '0c76402088d7ae6fe4688221c5402a23'}  # 添加所需的header
+            headers = {'utoken': '2d012ff1b64c4f9114b77704cb82c4ac','token': 'gh_e61ff6124379'}  # 添加所需的header
             response = session.post(url, files={'file': file},headers=headers)
             response.raise_for_status()
             data = response.json()
-            uploaded_url = data['data']
+            #print(data)
+            uploaded_url = data['data']['headImgUrl']
             return ""+uploaded_url
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
