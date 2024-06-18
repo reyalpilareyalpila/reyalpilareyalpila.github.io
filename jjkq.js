@@ -299,7 +299,7 @@ def convert_and_upload(file_path):
         with open(m3u8_path, "r") as f:
             content = f.read()
             
-        modified_content = content.replace(".ts", ".png")
+        modified_content = content.replace(".ts", ".jpg")
         with open(m3u8_path, "w") as f:
             f.write(modified_content)
         
@@ -372,7 +372,7 @@ def rename_ts_to_png(directory):
     for i, filename in enumerate(os.listdir(directory)):
         if filename.endswith(".ts"):
             old_path = os.path.join(directory, filename)
-            new_filename = os.path.splitext(filename)[0] + ".png"
+            new_filename = os.path.splitext(filename)[0] + ".jpg"
             new_path = os.path.join(directory, new_filename)
             os.rename(old_path, new_path)
 def upload_png_files666(output_dir):
@@ -385,7 +385,7 @@ def upload_png_files666(output_dir):
 def upload_png_files2(output_dir):
     base_url = "https://mall.xiangtuan.xyz/api/member/multi/member/uploadAvatar"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
-    png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
+    png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".jpg")]
     total_files = len(png_files)
 
     def update_m3u8_file(m3u8_path, upload_results):
@@ -419,9 +419,9 @@ def upload_png_files2(output_dir):
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
 
 def upload_png_files1(output_dir):
-    base_url = "https://moyin-gateway.moyin.com/tts-web-api/v1/resources?contentType=image/jpeg"
+    base_url = "https://d2capplet.app.com.cn/miniprogram-api/sinar-api/file/upload/single"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
-    png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".png")]
+    png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".jpg")]
     total_files = len(png_files)
 
     def update_m3u8_file(m3u8_path, upload_results):
@@ -462,7 +462,7 @@ def upload_png_file(url, png_path):
             response.raise_for_status()
             data = response.json()
             #print(data)
-            uploaded_url = data['data']['ossFile']
+            uploaded_url = data['data']
             return uploaded_url
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
