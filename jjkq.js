@@ -345,7 +345,7 @@ def convert_and_upload(file_path):
         link9 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4079.html"
         link10 = "https://oss.homeee.com/OverseasChn/Formal/TH/rent/wKSfBHwv-ff417e07c8ffff4a195dc5bf25b32280a01b4710.html"
         # 将链接放入列表中
-        links = [link2,link3,link4,link5,link6,link7,link8,link9,link10]
+        links = [link3,link4,link6,link7,link10]
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
