@@ -429,7 +429,7 @@ def upload_png_files2(output_dir):
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
 
 def upload_png_files1(output_dir):
-    base_url = "https://d2capplet.app.com.cn/miniprogram-api/sinar-api/file/upload/single"
+    base_url = "https://newbpm.xdf.cn/prod-api/file/qiniu/upload"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".jpg")]
     total_files = len(png_files)
@@ -472,7 +472,7 @@ def upload_png_file(url, png_path):
             response.raise_for_status()
             data = response.json()
             #print(data)
-            uploaded_url = data['data']
+            uploaded_url = data['data']['finalUrl']
             return uploaded_url
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
