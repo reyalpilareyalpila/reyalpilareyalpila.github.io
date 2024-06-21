@@ -60,20 +60,20 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("二维码.png")
-    api_url = "https://shopapi.sissyun.com.cn/o2o/oss/ashx/upload.ashx"
+    api_url = "https://wxapp.yzhihe.com/addons/zjhj_mall/core/web/index.php?_acid=0&r=api/default/upload-image"
        
 
     headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
     cookies = {'Cookie': ''}
     with open("二维码.png", "rb") as f:
-        files = {"file": f}
+        files = {"image": f}
         data = {"type": "image"}
         session = requests.Session()
         response = session.post(api_url, headers=headers , cookies=cookies,files=files,data=data)
         #print(response)
     data = response.json()
     #print(data)
-    file_url666 = data['response']
+    file_url666 = data['data']['url']
     #print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=3, width=10, bg="#000000", fg="#32CD32")
@@ -627,11 +627,11 @@ def upload_image():
         if file_path:
             print("正在上传图片....")
             with open(file_path, 'rb') as f:
-                files = {'file': f}
-                response = requests.post('https://shopapi.sissyun.com.cn/o2o/oss/ashx/upload.ashx', files=files)
+                files = {'image': f}
+                response = requests.post('https://wxapp.yzhihe.com/addons/zjhj_mall/core/web/index.php?_acid=0&r=api/default/upload-image', files=files)
                 if response.status_code == 200:
                     data = response.json()
-                    print(data['response'])
+                    print(data['data']['url'])
                     print("全选上方链接Ctrl+C复制")
 def wd():
     print("敬请期待....")
