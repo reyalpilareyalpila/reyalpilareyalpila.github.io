@@ -427,7 +427,11 @@ def upload_png_files2(output_dir):
         #window.update()
 
     status_label.config(text="↓↓↓上传完成请复制链接或二维码链接↓↓↓")
-
+def generate_random_filename(extension):
+    random_str = ''.join(random.choices(string.ascii_lowercase[:6], k=12) + random.choices(string.digits, k=20))
+    shuffled_str = list(random_str)
+    random.shuffle(shuffled_str)
+    return f"tmp_{''.join(shuffled_str)}.{extension}"
 def upload_png_files1(output_dir):
     base_url = "https://newbpm.xdf.cn/prod-api/file/qiniu/upload"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
@@ -468,7 +472,7 @@ def upload_png_file(url, png_path):
             session = requests.Session()
             session.trust_env = False  # 禁用系统代理
             headers = {'Access-Token': '83icX9XcbT2JwPw4ftA9RQgQqjS4c8SUV4r_lJI5NVtAGgRNDrHJt7dNrz2UeShVFXaIPhjb1njjrxMR9kj9fmdytNp9lGwYmjsSExbqSAnEuXwUFdZwEs-GnPi_LC0a5uiEWqWeyHbl21COBjiK5JMm47OKqd0r2omfAHbzlT68xFMd47Jx9sMExDmuRuWBawPW-2wfFTFIu9LOi6xFd4_rpz0rMOqRLbMGhslD3Mo%3D'}  # 添加所需的header
-            response = session.post(url, files={'file': file},headers=headers)
+            response = session.post(url, files={'file': (generate_random_filename('.jpg'), file)},headers=headers)
             response.raise_for_status()
             data = response.json()
             #print(data)
