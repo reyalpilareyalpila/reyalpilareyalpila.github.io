@@ -112,9 +112,21 @@ def update_data():
 　       /　⊃⊃
 　      /　   づ''')
 
-        abcd()
+        if current_date >= new_date:
+           print("宝贝到期啦")
+        else:
+            if result == "1" or content == result:
+                result_label.config(text="激活成功")
+                b.update(className, result1, data)
+                with open("666.txt", "w") as f:
+                    f.write(objectId)
+                abcd()
+            else:
+                print("激活失败")
+                result_label.config(text="激活失败")
     except Exception as e:
-        abcd()
+        print("激活码错误")
+        result_label.config(text="激活失败")
 
 
 
