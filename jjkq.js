@@ -333,29 +333,30 @@ def convert_and_upload(file_path):
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
-        link1 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_b5bb5b375e374507b6fd58ef4c3eec83.html"
-        link2 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_92294428d419429da1882a580cd0c050.html"
-        link3 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_bfd53c2c172a4132b8bf44316383e692.html"
-        link4 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_981781de31bb46fb86392b20e5fe8725.html"
-        link5 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_0f13f57e396540f69df5d4e566bd522f.html"
-        link6 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_52b5713dbaec4234ad54e5691942150b.html"
-        link7 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_75d6e3b7d80142348837e483f81dbace.html"
-        link8 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_c9266f19042e4ba596cd2357c83618bf.html"
-        link9 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_0fb63b3f1ce44790b050faac397e5999.html"
-        link10 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_cd525a245655451dbb9e0ae3c91acfcf.html"
-        link11 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_c5241c0882b74082aed83e3e7896e102.html"
-        link12 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_100fc19748ef494890224fc21bbcd289.html"
-        link13 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_4b014c4b93e14dd992f9d49681aecd0b.html"
-        link14 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_b56e4ad7435f497e93be702d79571223.html"
-        link15 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_0da98a0e07ca45cfbf5e002da2c0662b.html"
-        link16 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_d36d0e5ca4504f12a61d5febed07c4e8.html"
-        link17 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_c3d7ea357480487dbc05ca90cdcf4c87.html"
-        link18 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_c8f50d628be8410cade4cddd94b65867.html"
-        link19 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_8cec6fb042da475b9cce601d1a348d54.html"
-        link20 = "https://cdn.bypms.cn/statics/resources/pro/b_c_1/default/20240619_7abf907da102466fba87ed994fa73ed0.html"
+        link1 = "https://img.omofresh.com/wx/avatar/vns/684068515484794810.jpg"
+        link2 = "https://img.omofresh.com/wx/avatar/vns/684068515484794811.jpg"
+        link3 = "https://img.omofresh.com/wx/avatar/vns/684068515484794812.jpg"
+        link4 = "https://img.omofresh.com/wx/avatar/vns/684068515484794813.jpg"
+        link5 = "https://img.omofresh.com/wx/avatar/vns/684068515484794814.jpg"
+        link6 = "https://img.omofresh.com/wx/avatar/vns/684068515484794815.jpg"
+        link7 = "https://img.omofresh.com/wx/avatar/vns/684068515484794816.jpg"
+        link8 = "https://img.omofresh.com/wx/avatar/vns/684068515484794817.jpg"
+        link9 = "https://img.omofresh.com/wx/avatar/vns/684068515484794818.jpg"
+        link10 = "https://img.omofresh.com/wx/avatar/vns/684068515484794819.jpg"
+        link11 = "https://img.omofresh.com/wx/avatar/vns/684068515484794820.jpg"
+        link12 = "https://img.omofresh.com/wx/avatar/vns/684068515484794821.jpg"
+        link13 = "https://img.omofresh.com/wx/avatar/vns/684068515484794822.jpg"
+        link14 = "https://img.omofresh.com/wx/avatar/vns/684068515484794823.jpg"
+        link15 = "https://img.omofresh.com/wx/avatar/vns/684068515484794824.jpg"
+        link16 = "https://img.omofresh.com/wx/avatar/vns/684068515484794825.jpg"
+        link17 = "https://img.omofresh.com/wx/avatar/vns/684068515484794826.jpg"
+        link18 = "https://img.omofresh.com/wx/avatar/vns/684068515484794827.jpg"
+        link19 = "https://img.omofresh.com/wx/avatar/vns/684068515484794828.jpg"
+        link20 = "https://img.omofresh.com/wx/avatar/vns/684068515484794829.jpg"
+        link21 = "https://img.omofresh.com/wx/avatar/vns/684068515484794830.jpg"
 
         # 将链接放入列表中
-        links = [link1,link2,link3,link4,link5,link6,link7,link8,link9,link10,link11,link12,link13,link14,link15,link16,link17,link18,link19,link20]
+        links = [link1,link2,link3,link4,link5,link6,link7,link8,link9,link10,link11,link12,link13,link14,link15,link16,link17,link18,link19,link20,link21]
 
         # 使用random.choice()从列表中随机选择一个链接
         url = random.choice(links)+"?u="+reversed_s.decode('utf-8')
