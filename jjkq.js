@@ -333,28 +333,7 @@ def convert_and_upload(file_path):
         encoded_file_url = base64.b64encode(btfile.encode('utf-8'))
         reversed_s = encoded_file_url[::-1]
         global new_text
-        link1 = "https://img.omofresh.com/wx/avatar/vns/684068515484794810.jpg"
-        link2 = "https://img.omofresh.com/wx/avatar/vns/684068515484794811.jpg"
-        link3 = "https://img.omofresh.com/wx/avatar/vns/684068515484794812.jpg"
-        link4 = "https://img.omofresh.com/wx/avatar/vns/684068515484794813.jpg"
-        link5 = "https://img.omofresh.com/wx/avatar/vns/684068515484794814.jpg"
-        link6 = "https://img.omofresh.com/wx/avatar/vns/684068515484794815.jpg"
-        link7 = "https://img.omofresh.com/wx/avatar/vns/684068515484794816.jpg"
-        link8 = "https://img.omofresh.com/wx/avatar/vns/684068515484794817.jpg"
-        link9 = "https://img.omofresh.com/wx/avatar/vns/684068515484794818.jpg"
-        link10 = "https://img.omofresh.com/wx/avatar/vns/684068515484794819.jpg"
-        link11 = "https://img.omofresh.com/wx/avatar/vns/684068515484794820.jpg"
-        link12 = "https://img.omofresh.com/wx/avatar/vns/684068515484794821.jpg"
-        link13 = "https://img.omofresh.com/wx/avatar/vns/684068515484794822.jpg"
-        link14 = "https://img.omofresh.com/wx/avatar/vns/684068515484794823.jpg"
-        link15 = "https://img.omofresh.com/wx/avatar/vns/684068515484794824.jpg"
-        link16 = "https://img.omofresh.com/wx/avatar/vns/684068515484794825.jpg"
-        link17 = "https://img.omofresh.com/wx/avatar/vns/684068515484794826.jpg"
-        link18 = "https://img.omofresh.com/wx/avatar/vns/684068515484794827.jpg"
-        link19 = "https://img.omofresh.com/wx/avatar/vns/684068515484794828.jpg"
-        link20 = "https://img.omofresh.com/wx/avatar/vns/684068515484794829.jpg"
-        link21 = "https://img.omofresh.com/wx/avatar/vns/684068515484794830.jpg"
-
+        
         # 将链接放入列表中
         links = [link1,link2,link3,link4,link5,link6,link7,link8,link9,link10,link11,link12,link13,link14,link15,link16,link17,link18,link19,link20,link21]
 
