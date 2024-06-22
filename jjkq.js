@@ -56,6 +56,11 @@ def display_qrcode(url):
 # 将带有背景的二维码粘贴到新图片上
     new_img.paste(background_img, (20, 20))
 
+    draw = ImageDraw.Draw(new_img)
+    font = ImageFont.truetype("msyh.ttc", 55)  # 更改为微软雅黑字体，调整字体大小
+    text = "浏览器也可以扫哦！"  # 要添加的文字
+    text_position = (new_img.width // 2.5, new_img.height - 110)
+    draw.text(text_position, text, font=font, fill=(0, 0, 0))  # 绘制文字
 
 
 # 保存处理后的图片
