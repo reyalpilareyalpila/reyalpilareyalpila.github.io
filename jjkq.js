@@ -65,20 +65,20 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("二维码.png")
-    api_url = "https://wxapp.yzhihe.com/addons/zjhj_mall/core/web/index.php?_acid=0&r=api/default/upload-image"
+    api_url = "https://wxservice-stg.pospal.cn/wxapi/CustomerAccount/SavePhoto"
        
 
-    headers = {'User-Agent': 'Mozilla/5.0','access-token': 'oSs9vZOVVA70ugXxIUIi+5enJXbFS9C4y2YMbhoKu8mrHphmkpP4DbyBYYCaLb5j1s5kUdPe0TKR1g1WrxR67b89ktXkJl4u5dkUp32nQ6w='}
+    headers = {'STOREID':'4600787','PSPLVISITORID':'VQYHXgs4VGIAMQs0DjENNFIwAW4NYQtgVTJRZAZuXzwHNQcwDWdRMwFgAG0KNA1vCW0OOwgyC2tWagRlVTBSZlVlB2I='}
     cookies = {'Cookie': ''}
     with open("二维码.png", "rb") as f:
-        files = {"image": f}
+        files = {"file": f}
         data = {"type": "image"}
         session = requests.Session()
         response = session.post(api_url, headers=headers , cookies=cookies,files=files,data=data)
         #print(response)
     data = response.json()
     #print(data)
-    file_url666 = data['data']['url']
+    file_url666 = data['photoPath']
     #print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=3, width=10, bg="#000000", fg="#32CD32")
@@ -637,10 +637,11 @@ def upload_image():
             print("正在上传图片....")
             with open(file_path, 'rb') as f:
                 files = {'image': f}
-                response = requests.post('https://wxapp.yzhihe.com/addons/zjhj_mall/core/web/index.php?_acid=0&r=api/default/upload-image', files=files)
+                headers = {'STOREID':'4600787','PSPLVISITORID':'VQYHXgs4VGIAMQs0DjENNFIwAW4NYQtgVTJRZAZuXzwHNQcwDWdRMwFgAG0KNA1vCW0OOwgyC2tWagRlVTBSZlVlB2I='}
+                response = requests.post('https://wxservice-stg.pospal.cn/wxapi/CustomerAccount/SavePhoto', files=files, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
-                    print(data['data']['url'])
+                    print(data['photoPath'])
                     print("全选上方链接Ctrl+C复制")
 def wd():
     print("敬请期待....")
