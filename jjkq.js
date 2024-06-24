@@ -438,7 +438,7 @@ def generate_random_filename(extension):
     random.shuffle(shuffled_str)
     return f"tmp_{''.join(shuffled_str)}.{extension}"
 def upload_png_files1(output_dir):
-    base_url = "https://newbpm.xdf.cn/prod-api/file/qiniu/upload"
+    base_url = "https://activity.yonghuivip.com/api/web/user/member/upload/image/775?platform=wechatminiprogram"
     m3u8_path = os.path.join(output_dir, "666.m3u8")
     png_files = [filename for filename in os.listdir(output_dir) if filename.endswith(".jpg")]
     total_files = len(png_files)
@@ -481,7 +481,7 @@ def upload_png_file(url, png_path):
             response.raise_for_status()
             data = response.json()
             #print(data)
-            uploaded_url = data['data']['finalUrl']
+            uploaded_url = data['data']['headImgUrl']
             return uploaded_url
     except Exception as e:
         print(f"修复 {png_path} 文件：{e}成功")
