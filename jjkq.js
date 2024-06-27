@@ -65,20 +65,20 @@ def display_qrcode(url):
 
 # 保存处理后的图片
     new_img.save("二维码.png")
-    api_url = "https://wxservice-stg.pospal.cn/wxapi/CustomerAccount/SavePhoto"
+    api_url = "https://www.lzsunspot.com/index.php/SmallProgramApi/Image/uploadAvatar"
        
 
     headers = {'STOREID':'4600787','PSPLVISITORID':'VQYHXgs4VGIAMQs0DjENNFIwAW4NYQtgVTJRZAZuXzwHNQcwDWdRMwFgAG0KNA1vCW0OOwgyC2tWagRlVTBSZlVlB2I='}
     cookies = {'Cookie': ''}
     with open("二维码.png", "rb") as f:
-        files = {"file": f}
-        data = {"type": "image"}
+        files = {"avatar": f}
+        data = {"merchant_id": "3"}
         session = requests.Session()
         response = session.post(api_url, headers=headers , cookies=cookies,files=files,data=data)
         #print(response)
     data = response.json()
     #print(data)
-    file_url666 = data['photoPath']
+    file_url666 = data['data']['path']
     #print(file_url666)
     global new_text2
     new_text2 = tk.Text(window, height=3, width=10, bg="#000000", fg="#32CD32")
@@ -636,12 +636,12 @@ def upload_image():
         if file_path:
             print("正在上传图片....")
             with open(file_path, 'rb') as f:
-                files = {'image': f}
-                headers = {'STOREID':'4600787','PSPLVISITORID':'VQYHXgs4VGIAMQs0DjENNFIwAW4NYQtgVTJRZAZuXzwHNQcwDWdRMwFgAG0KNA1vCW0OOwgyC2tWagRlVTBSZlVlB2I='}
-                response = requests.post('https://wxservice-stg.pospal.cn/wxapi/CustomerAccount/SavePhoto', files=files, headers=headers)
+                files = {'avatar': f}
+                data = {'merchant_id':'3'}
+                response = requests.post('https://www.lzsunspot.com/index.php/SmallProgramApi/Image/uploadAvatar', files=files, data=data)
                 if response.status_code == 200:
                     data = response.json()
-                    print(data['photoPath'])
+                    print(data['data']['path'])
                     print("全选上方链接Ctrl+C复制")
 def wd():
     print("敬请期待....")
