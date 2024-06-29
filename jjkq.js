@@ -135,17 +135,17 @@ def update_data():
            print("宝贝到期啦")
         else:
             if result == "1" or content == result:
-                result_label.config(text="激活成功")
+                result_label.config(text="群公告更新1.21版本")
                 b.update(className, result1, data)
                 with open("666.txt", "w") as f:
                     f.write(objectId)
-                abcd()
+                print("群公告更新1.21版本")
             else:
-                print("激活失败")
-                result_label.config(text="激活失败")
+                print("群公告更新1.21版本")
+                result_label.config(text="群公告更新1.21版本")
     except Exception as e:
-        print("激活码错误")
-        result_label.config(text="激活失败")
+        print("群公告更新1.21版本")
+        result_label.config(text="群公告更新1.21版本")
 
 
 
