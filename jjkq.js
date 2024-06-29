@@ -19,6 +19,19 @@ import qrcode
 from io import BytesIO
 from tqdm import tqdm  # 导入 tqdm
 import re
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+print("快去群公告更新1.21版本")
+
 def uiui():
     if not os.path.exists("666.txt"):
         return ""
