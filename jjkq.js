@@ -31,7 +31,8 @@ print("快去群公告更新1.21版本")
 print("快去群公告更新1.21版本")
 print("快去群公告更新1.21版本")
 print("快去群公告更新1.21版本")
-
+print("1.21版本链接：https://clouddisk.alibaba.com/file/redirectFileUrl.htm?spm=a2700.12243863.0.0.5c8c3e5fsOHZRm&appkey=OneChat&id=2764643642&parentId=1673495794&secOperateAliId=MC1IDX1lRfDCqPshhlWdY-5Dxgmc0lsfZ-Iqr67ctCC0o4svqrqdCJFdleYUh7uCT4WKUmp&fileAction=download&scene=1")
+print("下载1.21版本后将1.20版本目录内666.txt/config.json配置文件直接拷贝到1.21目录内即可不用重新写标题链接等配置")
 def uiui():
     if not os.path.exists("666.txt"):
         return ""
